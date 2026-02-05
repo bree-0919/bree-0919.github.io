@@ -10,7 +10,7 @@ html, body {
   /* Use the project background image with a subtle dark overlay to keep text readable. */
   background:
     linear-gradient(rgba(8,12,30,0.45), rgba(28,18,34,0.45)),
-    url("purpleskystars.img") center/cover no-repeat fixed;
+    url("assets/images/spaceaudiowave.jpg") center/cover no-repeat fixed;
   overflow-x: hidden;
   position: relative;
 }
