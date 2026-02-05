@@ -5,7 +5,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Playfair Display', 'Josefin Sans', sans-serif;
   color: #F5F0FF;
   background: linear-gradient(to bottom, #0a143d 0%, #1c235c 50%, #3b2e68 100%);
   overflow-x: hidden;
