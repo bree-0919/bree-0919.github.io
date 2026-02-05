@@ -41,18 +41,18 @@ body::before {
 /* Header section with audio bars */
 header {
   position: relative;
-  min-height: 85vh;
+  min-height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
   overflow: hidden;
   z-index: 2; /* ensure header content sits above overlay */
 }
 
 header h1 {
-  font-size: 3.5rem;
+  font-size: 2rem;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0;
@@ -113,12 +113,12 @@ main {
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 2rem 0;
+  padding: 1rem 0;
   z-index: 2;
 }
 
 main section {
-  flex: 0 0 80%;
+  flex: 0 0 25%;
   scroll-snap-align: start;
   margin: 0 2%;
   background: rgba(255, 255, 255, 0.08);
@@ -126,7 +126,7 @@ main section {
   border-radius: 16px;
   backdrop-filter: blur(6px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  padding: 2rem;
+  padding: 1rem;
   color: #ECE6FA;
 }
 
@@ -136,7 +136,7 @@ main section:nth-child(odd) {
 
 section h2 {
   margin-top: 0;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   text-transform: capitalize;
   color: #C1B5D0;
 }
@@ -155,8 +155,8 @@ a:hover {
 /* Footer */
 footer {
   text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
+  padding: 1rem;
+  font-size: 0.8rem;
   color: #B5A9C9;
   z-index: 2;
 }
@@ -164,7 +164,7 @@ footer {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   header h1 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
   }
   main {
     flex-direction: column;
@@ -173,19 +173,19 @@ footer {
   main section {
     flex: 1 1 auto;
     width: 90%;
-    margin: 1rem auto;
+    margin: 0.5rem auto;
   }
   .audio-bars {
-    height: 12vh;
+    height: 8vh;
   }
 }
 /* responsive image for the Cool Picture section */
 .cool-image {
   display: block;
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   border-radius: 8px;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   box-shadow: 0 8px 30px rgba(2,6,23,0.45);
 }
 /* Small helper: ensure content is readable if the image is very dark or light */
