@@ -179,7 +179,15 @@ footer {
     height: 12vh;
   }
 }
-
+/* responsive image for the Cool Picture section */
+.cool-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 1rem;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.45);
+}
 /* Small helper: ensure content is readable if the image is very dark or light */
 .content-contrast {
   background: rgba(0,0,0,0.35);
