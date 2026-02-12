@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* styles for the TP4: Tic-Tac-Toe project */
 
 #gameBoard {
@@ -42,3 +43,59 @@
 .col3 {
     left: calc( ( var(--gameBoardSize) / 3 ) * 2 );
 }
+=======
+/* Basic styling for the body to center the game board *//* Basic styling for the body to center the game board */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+    }
+    
+    /* The main game board container */
+    .gameboard {
+        display: grid;
+        grid-template-columns: repeat(3, 100px); /* 3 columns of 100px each */
+        grid-template-rows: repeat(3, 100px);    /* 3 rows of 100px each */
+        gap: 10px; /* Space between cells */
+        background-color: #333;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    
+    /* Individual cells within the game board */
+    .cell {
+        background-color: #fff;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3em;
+        font-weight: bold;
+        color: #333;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .cell:hover {
+        background-color: #eee;
+    }
+    
+    /* Responsive adjustments - make the board smaller on smaller screens */
+    @media (max-width: 400px) {
+        .gameboard {
+            grid-template-columns: repeat(3, 70px);
+            grid-template-rows: repeat(3, 70px);
+            gap: 5px;
+            padding: 5px;
+        }
+        .cell {
+            font-size: 2em;
+        }
+    }
+    
+>>>>>>> 9bb1956 (Edited the H1 title to test the dev Initial layout for TP4 using AI assistance)
