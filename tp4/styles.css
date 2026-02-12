@@ -27,12 +27,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: clamp(1.5rem, 8vw, 3rem); /* Responsive font size */
-    font-family: 'Segoe UI', sans-serif;
+    font-size: clamp(2rem, 10vw, 4.5rem); /* Responsive font size */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     font-weight: 900;
     color: #483d8b;
     cursor: pointer;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     transition: all 0.2s ease;
+    text-transform: uppercase;
 }
 
 .gameSpace:hover {
