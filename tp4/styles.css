@@ -1,14 +1,11 @@
 /* styles for the TP4: Tic-Tac-Toe project */
 
-:root {
-    --gameBoardSize: 80vh;
-    --gameBoardSpacer: 15px;
-}
-
 #gameBoard {
     position: relative;
     width: var(--gameBoardSize);
     height: var(--gameBoardSize);
+    width: calc( var(--gameBoardSize) - var(--gameBoardSpacer));
+    height: calc( var(--gameBoardSize) - var(--gameBoardSpacer));
     background-color: black;
 
     display: grid;
@@ -19,5 +16,42 @@
 
 .gameSpace {
     position: relative;
+    position: absolute;
     background-color: white;
+    width: calc( ( var(--gameBoardSize) / 3 ) - var(--gameBoardSpacer) );
+    height: calc( ( var(--gameBoardSize) / 3 ) - var(--gameBoardSpacer) );
+    font-family: "Twinkle Star";
+    font-size: 10rem;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Twinkle Star";
+    text-transform: uppercase;
+}
+
+.row1 {
+    top: 0;
+}
+
+.row2 {
+    top: calc( var(--gameBoardSize) / 3 );
+}
+
+.row3 {
+    top: calc( ( var(--gameBoardSize) / 3 ) * 2 );
+}
+
+.col1 {
+    left: 0;
+}
+
+.col2 {
+    left: calc( var(--gameBoardSize) / 3 );
+}
+
+.col3 {
+    left: calc( ( var(--gameBoardSize) / 3 ) * 2 );
 }
