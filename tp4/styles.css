@@ -2,33 +2,20 @@
 
 #gameBoard {
     position: relative;
-    width: var(--gameBoardSize);
-    height: var(--gameBoardSize);
     width: calc( var(--gameBoardSize) - var(--gameBoardSpacer));
     height: calc( var(--gameBoardSize) - var(--gameBoardSpacer));
     background-color: black;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: var(--gameBoardSpacer);
 }
 
 .gameSpace {
-    position: relative;
     position: absolute;
     background-color: white;
     width: calc( ( var(--gameBoardSize) / 3 ) - var(--gameBoardSpacer) );
     height: calc( ( var(--gameBoardSize) / 3 ) - var(--gameBoardSpacer) );
     font-family: "Twinkle Star";
     font-size: 10rem;
-    text-transform: uppercase;
     overflow: hidden;
     text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Twinkle Star";
     text-transform: uppercase;
 }
 
