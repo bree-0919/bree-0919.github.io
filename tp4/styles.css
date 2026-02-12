@@ -1,23 +1,42 @@
-/* styles for the TP4: Tic-Tac-Toe project */
-#gameBoard {
-    display: grid;
-    grid-template-columns: repeat(3, 100px); /* Creates 3 equal columns */
-    gap: 10px;
-    background-color: #333;
-    width: fit-content;
-    padding: 10px;
-    margin: 20px auto;
-}
- 
-.gameSpace {
-    width: 100px;
-    height: 100px;
-    background-color: white;
+/* Enhanced styles for TP4: Tic-Tac-Toe */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Deep purple gradient */
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
-    font-family: sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
+    margin: 0;
+}
+
+#gameBoard {
+    display: grid;
+    /* Responsive sizing: use viewport units so it shrinks on small screens */
+    grid-template-columns: repeat(3, min(25vw, 120px)); 
+    grid-template-rows: repeat(3, min(25vw, 120px));
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent border effect */
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+}
+
+.gameSpace {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(1.5rem, 8vw, 3rem); /* Responsive font size */
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 900;
+    color: #483d8b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gameSpace:hover {
+    background-color: #fff;
+    transform: scale(1.05); /* Pops out slightly on hover */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
