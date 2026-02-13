@@ -1,1 +1,76 @@
 /* styles for Concentration board */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.game-title {
+    color: white;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+}
+
+#gameBoard {
+    display: grid;
+    /* This makes the grid responsive automatically! */
+    grid-template-columns: repeat(auto-fit, minmax(70px, 120px)); 
+    gap: 15px;
+    width: 90%;          /* Uses most of the screen width */
+    max-width: 600px;    /* Keeps it from getting too huge on desktop */
+    margin: 0 auto;      /* Centers the board */
+    justify-content: center;
+}
+
+.card {
+    aspect-ratio: 1 / 1; /* Keeps the cards perfectly square */
+    width: 100%;         /* Follows the grid column width */
+    perspective: 1000px;
+}
+
+.cardContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+/* This makes the card flip when you hover! */
+.card:hover .cardContent {
+    transform: rotateY(180deg);
+}
+
+.cardTop, .cardBottom {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.cardTop {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.cardBottom {
+    transform: rotateY(180deg);
+}
+
+/* Neon Colors for the 8 Pairs */
+.pair1 .cardBottom { background: rgba(255, 0, 255, 0.6); box-shadow: 0 0 15px #ff00ff; }
+.pair2 .cardBottom { background: rgba(0, 255, 255, 0.6); box-shadow: 0 0 15px #00ffff; }
+.pair3 .cardBottom { background: rgba(172, 79, 198, 0.6); box-shadow: 0 0 15px #ac4fc6; }
+.pair4 .cardBottom { background: rgba(255, 255, 255, 0.6); box-shadow: 0 0 15px #ffffff; }
+.pair5 .cardBottom { background: rgba(0, 255, 0, 0.6); box-shadow: 0 0 15px #00ff00; }
+.pair6 .cardBottom { background: rgba(255, 165, 0, 0.6); box-shadow: 0 0 15px #ff6600; }
+.pair7 .cardBottom { background: rgba(255, 255, 0, 0.6); box-shadow: 0 0 15px #ffff00; }
+.pair8 .cardBottom { background: rgba(75, 0, 130, 0.6); box-shadow: 0 0 15px #4b0082; }
