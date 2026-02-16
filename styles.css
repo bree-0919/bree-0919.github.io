@@ -10,7 +10,7 @@ html, body {
   /* Use the project background image with a subtle dark overlay to keep text readable. */
   background:
     linear-gradient(rgba(8,12,30,0.45), rgba(28,18,34,0.45)),
-    url("assets/images/spaceaudiowave.jpg") center/cover no-repeat fixed;
+    url("https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzEyNjM1MTl8&ixlib=rb-4.1.0&q=85") center/cover no-repeat fixed;
   overflow-x: hidden;
   position: relative;
 }
@@ -38,28 +38,30 @@ body::before {
   50% {opacity: 1;}
 }
 
-/* Header section with audio bars */
 header {
-  position: relative;
-  min-height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
   text-align: center;
-  padding: 1rem;
-  overflow: hidden;
-  z-index: 2; /* ensure header content sits above overlay */
+  /* Increase the first number (top padding) to push everything down */
+  padding: 250px 0 170px 0; 
+  position: relative;
+  z-index: 10;
 }
 
+main {
+  /* This ensures the scrolling boxes stay centered horizontally */
+  display: flex;
+  justify-300px 0 7content: flex-start; /* Keep them starting from the left for scrolling */
+  padding: 20px 50px;
+  margin-top: 20px; /* Optional: adds even more space below the header */
+}
 header h1 {
-  font-size: 2rem;
+  font-size: 2.5rem; /* Made it a bit bigger for impact */
   text-transform: uppercase;
   letter-spacing: 2px;
-  z-index: 3;
   color: #F5F0FF;
-  text-shadow: 0 2px 18px rgba(15,10,30,0.7);
+  text-shadow: 0 2px 18px rgba(15, 10, 30, 0.7);
+  margin: 0; /* Removes default spacing that might cause extra gaps */
 }
-
 .audio-bars {
   position: absolute;
   bottom: 10%;
@@ -111,10 +113,10 @@ header h1 {
 main {
   display: flex;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 1rem 0;
-  z-index: 2;
-  margin-top: 50px; 
+  gap: 30px;
+  padding: 20px 40px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile */
 }
 
 main section {
@@ -181,16 +183,124 @@ footer {
 }
 /* responsive image for the Cool Picture section */
 .cool-image {
-  display: block;
+  display: block;      /* This tells the image to act like a box */
+  margin: 1rem auto;   /* 'auto' on left and right pushes it to the center */
   max-width: 80%;
   height: auto;
   border-radius: 8px;
-  margin-top: 0.5rem;
-  box-shadow: 0 8px 30px rgba(2,6,23,0.45);
+  box-shadow: 0 8px 30px rgba(2, 6, 23, 0.45);
 }
 /* Small helper: ensure content is readable if the image is very dark or light */
 .content-contrast {
   background: rgba(0,0,0,0.35);
   padding: 1rem;
   border-radius: 10px;
+}
+.photo-credit {
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  font-size: 0.7rem;
+  color: rgba(245, 240, 255, 0.6); /* Matches your #F5F0FF color with transparency */
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.photo-credit a {
+  color: rgba(245, 240, 255, 0.8);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.photo-credit a:hover {
+  border-bottom: 1px solid #F5F0FF;
+}
+.site-footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 15px 0;
+  background: rgba(0, 0, 0, 0.4); /* Darker semi-transparent bar */
+  backdrop-filter: blur(5px);    /* Modern "glass" effect */
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.85rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center; /* Centers the whole line */
+  align-items: center;
+  gap: 15px;               /* Space between copyright and photo credit */
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.site-footer a {
+  color: #F5F0FF;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: 0.3s;
+}
+
+.site-footer a:hover {
+  border-bottom: 1px solid #F5F0FF;
+}
+
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 350px;       /* Keeps boxes wide enough for horizontal scrolling */
+  min-height: 400px;
+  text-align: center;
+  /* Your existing background/border styles here */
+}
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+
+/* On small screens, stack them so they don't overlap */
+@media (max-width: 600px) {
+  .site-footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  section { 
+  display: flex;
+  flex-direction: column;   /* Keeps items stacked vertically */
+  justify-content: center;  /* Centers content vertically */
+  align-items: center;      /* Centers content horizontally */
+  text-align: center;       /* Ensures text lines themselves are centered */
+  padding: 40px;            /* Gives the text some breathing room */
+  min-height: 250px;        /* Ensures all boxes have a consistent minimum height */
+
+
+header, .site-header {
+  position: relative;
+  top: 0;
+  width: 100%;
+  background-color: #f0f0f0;
+  z-index: 10;
+  padding-bottom: 70px;
+  margin-bottom: 0; /* Reset margin if padding is used */
+}
+
+main {
+  padding-top: 90px; /* Adjust to be more than header padding-bottom */
+}
 }
