@@ -4,7 +4,7 @@ body{
   color: white;
   overflow: hidden;
 
-  background-image: url("https://images.unsplash.com/photo-1529528744093-6f8abeee511d?q=80&w=2000&auto=format&fit=crop");
+  background-image: url("https://images.unsplash.com/photo-1526723840248-0ad14803008d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzEyNDQ5MDJ8&ixlib=rb-4.1.0&q=85");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -51,7 +51,7 @@ body{
       rgba(48,43,99,0.75),
       rgba(36,36,62,0.85)
     ),
-    url("https://images.unsplash.com/photo-1529528744093-6f8abeee511d?q=80&w=2000&auto=format&fit=crop");
+    url("https://images.unsplash.com/photo-1526723840248-0ad14803008d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzEyNDQ5MDJ8&ixlib=rb-4.1.0&q=85");
 
   background-size: cover;
   background-position: center;
