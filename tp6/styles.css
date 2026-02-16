@@ -1,19 +1,26 @@
 body{
   margin: 0;
-  font-family: -apple-system, sans-serif;
+  font-family: 'Nunito', -apple-system, sans-serif;
   color: white;
   overflow: hidden;
 
-  /* restore the sky image */
   background-image: url("https://images.unsplash.com/photo-1529528744093-6f8abeee511d?q=80&w=2000&auto=format&fit=crop");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.main-temp {
+.main-header h1{
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.main-temp{
   font-weight: 200;
-  letter-spacing: -1px;
+  letter-spacing: -2px;
+  text-shadow:
+    0 0 20px rgba(255,255,255,0.25),
+    0 0 40px rgba(180,150,255,0.15);
 }
 
 .unit {
