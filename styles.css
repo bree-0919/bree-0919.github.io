@@ -1,5 +1,7 @@
 /* Custom styles for Bree's Hello World assignment */
-
+* {
+  box-sizing: border-box;
+}
 html, body {
   height: 100%;
   margin: 0;
@@ -165,20 +167,25 @@ footer {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  header h1 {
-    font-size: 1.5rem;
+  /* Fix the Header gap for small screens */
+  header {
+    padding: 100px 0 40px 0 !important; /* '!important' forces it to listen */
   }
+
+  /* Stack the boxes vertically */
   main {
     flex-direction: column;
-    overflow-x: hidden;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden; /* Stops that annoying side-scroll */
   }
+
+  /* Make boxes fit the screen */
   main section {
-    flex: 1 1 auto;
-    width: 90%;
-    margin: 0.5rem auto;
-  }
-  .audio-bars {
-    height: 8vh;
+    flex: none;          /* This cancels the 350px rule */
+    width: 90%;          /* The box will now shrink to fit the phone */
+    min-width: unset;    /* This is the most important line! */
+    margin: 10px 0;
   }
 }
 /* responsive image for the Cool Picture section */
@@ -273,34 +280,42 @@ section {
   position: fixed;
   bottom: 0;
 
-/* On small screens, stack them so they don't overlap */
-@media (max-width: 600px) {
-  .site-footer {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
+/* --- CLEAN CONSOLIDATED MOBILE STYLES --- */
+@media (max-width: 768px) {
+  /* 1. Fix Header: Bring "Hello World" up so it's visible immediately */
+  header {
+    padding: 60px 0 30px 0 !important;
   }
-  section { 
-  display: flex;
-  flex-direction: column;   /* Keeps items stacked vertically */
-  justify-content: center;  /* Centers content vertically */
-  align-items: center;      /* Centers content horizontally */
-  text-align: center;       /* Ensures text lines themselves are centered */
-  padding: 40px;            /* Gives the text some breathing room */
-  min-height: 250px;        /* Ensures all boxes have a consistent minimum height */
 
+  header h1 {
+    font-size: 1.8rem;
+  }
 
-header, .site-header {
-  position: relative;
-  top: 0;
-  width: 100%;
-  background-color: #f0f0f0;
-  z-index: 10;
-  padding-bottom: 70px;
-  margin-bottom: 0; /* Reset margin if padding is used */
-}
+  /* 2. Main Container: Stack boxes vertically instead of scrolling sideways */
+  main {
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 10px 0 !important;
+    margin-top: 0 !important;
+    overflow-x: hidden;
+  }
 
-main {
-  padding-top: 90px; /* Adjust to be more than header padding-bottom */
-}
+  /* 3. The Boxes: Make them fit the narrow screen */
+  main section {
+    flex: none !important;      /* Stops the 350px fixed width */
+    width: 90% !important;      /* Boxes now fill 90% of the phone screen */
+    min-width: unset !important; /* Critical: allows box to shrink below 350px */
+    min-height: auto !important; /* Allows box height to adjust to text */
+    margin: 15px auto !important;
+    padding: 30px 20px !important;
+  }
+
+  /* 4. Footer: Stack the links so they don't overlap */
+  .site-footer {
+    position: relative !important; /* Static at bottom of content instead of floating */
+    flex-direction: column !important;
+    height: auto !important;
+    padding: 20px 10px !important;
+    gap: 10px !important;
+  }
 }
