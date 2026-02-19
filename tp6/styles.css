@@ -81,7 +81,7 @@ body{
 .main-header{
   text-align: center;
 
-  position: sticky;
+ /* position: sticky; */
   top: 0;
   z-index: 5;
 
@@ -92,30 +92,12 @@ body{
   backdrop-filter: none;
 }
 
-.home-pill{
-  font-size: .72rem;
-  letter-spacing: .18em;
-  opacity: .8;
-  margin-bottom: 6px;
-}
-
-.main-header h1{
-  margin: 0;
-  font-weight: 700;
-}
-
 .main-temp{
   font-size: 4.6rem;
   font-weight: 200;
   letter-spacing: -2px;
   margin: 6px 0;
   line-height: 1;
-}
-
-.unit{
-  font-size: .32em;
-  vertical-align: super;
-  margin-left: 2px;
 }
 
 .condition{ margin: 0; opacity: .95; }
@@ -129,7 +111,7 @@ body{
   gap: 8px;
   flex-wrap: wrap;
 }
-.dot{ opacity: .85; }
+ .dot{ opacity: .85; }
 
 /* ========= SCROLL AREA ========= */
 .app-scroll{
