@@ -585,3 +585,7 @@ Desktop layout goal:
     0 0 6px rgba(255,255,255,0.8),
     0 0 12px rgba(180,150,255,0.6);
 }
+
+@media (max-height: 500px) and (orientation: landscape) {
+  /* adjustments for short landscape screens */
+}
