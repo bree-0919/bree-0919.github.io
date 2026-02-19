@@ -1,4 +1,3 @@
-/* styles for Concentration board */
 body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
@@ -62,15 +61,81 @@ body {
 }
 
 .cardBottom {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  position: relative;
+  overflow: hidden;
 }
 
+
+
 /* Neon Colors for the 8 Pairs */
-.pair1 .cardBottom { background: rgba(255, 0, 255, 0.6); box-shadow: 0 0 15px #ff00ff; }
-.pair2 .cardBottom { background: rgba(0, 255, 255, 0.6); box-shadow: 0 0 15px #00ffff; }
-.pair3 .cardBottom { background: rgba(172, 79, 198, 0.6); box-shadow: 0 0 15px #ac4fc6; }
-.pair4 .cardBottom { background: rgba(255, 255, 255, 0.6); box-shadow: 0 0 15px #ffffff; }
-.pair5 .cardBottom { background: rgba(0, 255, 0, 0.6); box-shadow: 0 0 15px #00ff00; }
-.pair6 .cardBottom { background: rgba(255, 165, 0, 0.6); box-shadow: 0 0 15px #ff6600; }
-.pair7 .cardBottom { background: rgba(255, 255, 0, 0.6); box-shadow: 0 0 15px #ffff00; }
-.pair8 .cardBottom { background: rgba(75, 0, 130, 0.6); box-shadow: 0 0 15px #4b0082; }
+.pair1 .cardBottom {
+  background-image: url('https://images.unsplash.com/photo-1537210249814-b9a10a161ae4?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85');
+
+  box-shadow: 0 0 18px #ff00ff;
+}
+
+.pair2 .cardBottom {
+  background-image: url('https://images.unsplash.com/photo-1585074245704-62bd99f04219?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85');
+
+ box-shadow: 0 0 18px #00ffff;
+}
+.pair3 .cardBottom {
+  background-image: url('https://images.unsplash.com/photo-1673990959548-81f5947da8f0?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85');
+
+  box-shadow:
+    0 0 6px #d580ff,
+    0 0 14px #c05cff,
+    0 0 22px #a84cff;
+}
+
+.pair4 .cardBottom {
+  background-image: url('https://images.unsplash.com/photo-1508697014387-db70aad34f4d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85');
+
+  box-shadow:
+    0 0 8px rgba(255,255,255,0.9),
+    0 0 18px rgba(200,230,255,0.8),
+    0 0 34px rgba(150,200,255,0.6),
+    0 0 50px rgba(120,180,255,0.5);
+}
+
+.pair5 .cardBottom {
+  background-image: url('https://images.unsplash.com/photo-1720711621736-3c3f4714b2f0?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85');
+
+  box-shadow: 0 0 18px #00ff00;
+}
+.pair6 .cardBottom {
+  background-image: url('https://images.unsplash.com/photo-1696351808576-e882b848b93e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85');
+
+ box-shadow:
+    0 0 6px #f4ff9a,
+    0 0 14px #d4ff4d,
+    0 0 26px #b6ff00,
+    0 0 42px rgba(182,255,0,0.6);
+
+}
+
+.pair7 .cardBottom {
+  background-image: url('https://images.unsplash.com/photo-1694440967479-4ee9d6d6b587?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85');
+
+  box-shadow:
+  0 0 8px rgba(255,255,220,0.9),
+  0 0 18px rgba(255,230,180,0.7),
+  0 0 34px rgba(255,200,120,0.6),
+  0 0 50px rgba(255,170,80,0.5);
+
+}
+.pair8 .cardBottom {
+  background-image: url('https://images.unsplash.com/photo-1696353342921-1c07791c05eb?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODQ2ODN8&ixlib=rb-4.1.0&q=85');
+
+    box-shadow:
+    0 0 6px #ffd27a,
+    0 0 14px #ffb347,
+    0 0 26px #ff8c00,
+    0 0 40px rgba(255,140,0,0.6);
+}
