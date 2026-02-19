@@ -24,160 +24,152 @@
     <h1>Vancouver, WA</h1>
 
     <div class="temp-row">
-      <div class="main-temp">42°<span class="unit">F</span></div>
+      <div class="main-temp">37°<span class="unit">F</span></div>
     </div>
 
     <p class="condition">
-      Mostly Cloudy <span class="icon" aria-hidden="true">☁️</span>
+      Cloudy <span class="icon" aria-hidden="true">☁️</span>
     </p>
 
     <div class="subline">
-      <span>Feels Like: 38°</span>
+      <span>Feels Like: 36°</span>
       <span class="dot">•</span>
-      <span>H: 44°</span>
+      <span>H: 41°</span>
       <span class="dot">•</span>
       <span>L: 35°</span>
     </div>
   </header>
 
-  <section class="cluster" aria-label="Weather tiles">
-    <!-- LEFT: Forecast -->
-    <article class="card tile tile--forecast" aria-label="7-day forecast">
-      <h2 class="tile-title">7-Day Forecast</h2>
+  <!-- Scrollable content area (tiles + footer) -->
+  <div class="app-scroll" aria-label="Scrollable weather content">
+    <section class="cluster" aria-label="Weather tiles">
+      <!-- LEFT: Forecast -->
+      <article class="card tile tile--forecast" aria-label="7-day forecast">
+        <h2 class="tile-title">7-Day Forecast</h2>
 
-      <div class="forecast-list">
-        <div class="forecast-row">
-          <div class="day">Today</div>
-          <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
-          <div class="range">35°–42°</div>
-          <div class="wind">8 mph SW</div>
-        </div>
-
-        <div class="forecast-row">
-          <div class="day">Thu</div>
-          <div class="cond"><span aria-hidden="true">❄️</span> Snow</div>
-          <div class="range">33°–44°</div>
-          <div class="wind">6 mph W</div>
-        </div>
-
-        <div class="forecast-row">
-          <div class="day">Fri</div>
-          <div class="cond"><span aria-hidden="true">☁️</span> Clouds</div>
-          <div class="range">32°–44°</div>
-          <div class="wind">10 mph SE</div>
-        </div>
-
-        <div class="forecast-row">
-          <div class="day">Sat</div>
-          <div class="cond"><span aria-hidden="true">☁️</span> Clouds</div>
-          <div class="range">38°–49°</div>
-          <div class="wind">7 mph S</div>
-        </div>
-
-        <div class="forecast-row">
-          <div class="day">Sun</div>
-          <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
-          <div class="range">45°–52°</div>
-          <div class="wind">9 mph SW</div>
-        </div>
-
-        <div class="forecast-row">
-          <div class="day">Mon</div>
-          <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
-          <div class="range">44°–51°</div>
-          <div class="wind">10 mph W</div>
-        </div>
-
-        <div class="forecast-row">
-          <div class="day">Tue</div>
-          <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
-          <div class="range">42°–49°</div>
-          <div class="wind">8 mph NW</div>
-        </div>
-      </div>
-    </article>
-
-    <!-- RIGHT: Mini tiles -->
-    <aside class="mini-scroll" aria-label="Current conditions tiles">
-      <!-- WIND -->
-      <article class="card tile tile--mini tile--wind" aria-label="Wind details">
-        <div class="tile-head">
-          <div class="tile-label">
-            <span class="mini-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M3 8h10.5c2.2 0 3.5-1.1 3.5-2.6C17 3.5 15.6 2 13.6 2c-1.6 0-2.8.9-3.2 2.2"
-                      stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M3 12h14.5c2.3 0 3.5 1.2 3.5 2.8 0 1.9-1.6 3.2-3.6 3.2-1.7 0-2.9-.9-3.3-2.2"
-                      stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </span>
-            <span class="tile-title mini-title">WIND</span>
+        <div class="forecast-list">
+          <div class="forecast-row">
+            <div class="day">Today</div>
+            <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
+            <div class="range">35°–42°</div>
+            <div class="wind">8 mph SW</div>
           </div>
 
-          <div class="mini-dim">7 mph</div>
-        </div>
-
-        <div class="wind-grid">
-          <div class="wind-lines">
-            <div class="row">
-              <div class="k">Wind</div>
-              <div class="v dim">7 mph</div>
-            </div>
-            <div class="row">
-              <div class="k">Gusts</div>
-              <div class="v dim">16 mph</div>
-            </div>
-            <div class="row">
-              <div class="k">Direction</div>
-              <div class="v dim">197° SSW</div>
-            </div>
+          <div class="forecast-row">
+            <div class="day">Thu</div>
+            <div class="cond"><span aria-hidden="true">❄️</span> Snow</div>
+            <div class="range">33°–44°</div>
+            <div class="wind">6 mph W</div>
           </div>
 
-          <div class="compass" aria-hidden="true" style="--from:197deg;">
-            <div class="compass-face">
-              <div class="tick-ring"></div>
+          <div class="forecast-row">
+            <div class="day">Fri</div>
+            <div class="cond"><span aria-hidden="true">☁️</span> Clouds</div>
+            <div class="range">32°–44°</div>
+            <div class="wind">10 mph SE</div>
+          </div>
 
-              <div class="cardinals">
-                <span class="n">N</span>
-                <span class="e">E</span>
-                <span class="s">S</span>
-                <span class="w">W</span>
-              </div>
+          <div class="forecast-row">
+            <div class="day">Sat</div>
+            <div class="cond"><span aria-hidden="true">☁️</span> Clouds</div>
+            <div class="range">38°–49°</div>
+            <div class="wind">7 mph S</div>
+          </div>
 
-              <div class="needle">
-                <div class="needle-head"></div>
-                <div class="needle-tail"></div>
-              </div>
+          <div class="forecast-row">
+            <div class="day">Sun</div>
+            <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
+            <div class="range">45°–52°</div>
+            <div class="wind">9 mph SW</div>
+          </div>
 
-              <div class="compass-readout">
-                <div class="num">7</div>
-                <div class="u">mph</div>
-              </div>
-            </div>
+          <div class="forecast-row">
+            <div class="day">Mon</div>
+            <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
+            <div class="range">44°–51°</div>
+            <div class="wind">10 mph W</div>
+          </div>
+
+          <div class="forecast-row">
+            <div class="day">Tue</div>
+            <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
+            <div class="range">42°–49°</div>
+            <div class="wind">8 mph NW</div>
           </div>
         </div>
       </article>
 
-      <!-- HUMIDITY -->
-      <article class="card tile tile--mini tile--humidity" aria-label="Humidity details">
-        <div class="tile-head">
-          <div class="tile-label">
-            <span class="mini-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 2s6 6.6 6 11.4A6 6 0 1 1 6 13.4C6 8.6 12 2 12 2Z"
-                      stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <span class="tile-title mini-title">HUMIDITY</span>
+      <!-- RIGHT TOP: only the first two tiles -->
+      <aside class="mini-top" aria-label="Top right tiles">
+        <!-- WIND -->
+        <article class="card tile tile--mini tile--wind" aria-label="Wind details">
+          <div class="tile-head">
+            <div class="tile-label">
+              <span class="mini-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M3 8h10.5c2.2 0 3.5-1.1 3.5-2.6C17 3.5 15.6 2 13.6 2c-1.6 0-2.8.9-3.2 2.2"
+                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M3 12h14.5c2.3 0 3.5 1.2 3.5 2.8 0 1.9-1.6 3.2-3.6 3.2-1.7 0-2.9-.9-3.3-2.2"
+                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="mini-title">WIND</span>
+            </div>
+            <div class="mini-dim">7 mph</div>
           </div>
-        </div>
 
-        <div class="big-metric">80<span class="pct">%</span></div>
-        <div class="mini-body">
+          <div class="wind-grid">
+            <div class="wind-lines">
+              <div class="row"><div class="k">Wind</div><div class="v dim">7 mph</div></div>
+              <div class="row"><div class="k">Gusts</div><div class="v dim">16 mph</div></div>
+              <div class="row"><div class="k">Direction</div><div class="v dim">197° SSW</div></div>
+            </div>
+
+            <div class="compass" aria-hidden="true" style="--from:197deg;">
+              <div class="compass-face">
+                <div class="tick-ring"></div>
+
+                <div class="cardinals">
+                  <span class="n">N</span>
+                  <span class="e">E</span>
+                  <span class="s">S</span>
+                  <span class="w">W</span>
+                </div>
+
+                <div class="needle">
+                  <div class="needle-head"></div>
+                  <div class="needle-tail"></div>
+                </div>
+
+                <div class="compass-readout">
+                  <div class="num">7</div>
+                  <div class="u">mph</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- HUMIDITY -->
+        <article class="card tile tile--mini tile--humidity" aria-label="Humidity details">
+          <div class="tile-head">
+            <div class="tile-label">
+              <span class="mini-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2s6 6.6 6 11.4A6 6 0 1 1 6 13.4C6 8.6 12 2 12 2Z"
+                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="mini-title">HUMIDITY</span>
+            </div>
+          </div>
+
+          <div class="big-metric">80<span class="pct">%</span></div>
           <p class="mini-note">The dew point is <strong>35°</strong> right now.</p>
-        </div>
-      </article>
+        </article>
+      </aside>
 
+      <!-- THESE TWO now “wrap” under the forecast -->
       <!-- AIR QUALITY -->
       <article class="card tile tile--mini tile--air" aria-label="Air quality details">
         <div class="tile-head">
@@ -193,7 +185,7 @@
                 <circle cx="16" cy="12" r="1.2" fill="currentColor"/>
               </svg>
             </span>
-            <span class="tile-title mini-title">AIR QUALITY</span>
+            <span class="mini-title">AIR QUALITY</span>
           </div>
         </div>
 
@@ -222,38 +214,29 @@
                       stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
               </svg>
             </span>
-            <span class="tile-title mini-title">WAXING CRESCENT</span>
+            <span class="mini-title">WAXING CRESCENT</span>
           </div>
         </div>
 
         <div class="moon-grid">
           <div class="moon-lines">
-            <div class="row">
-              <div class="k">Illumination</div>
-              <div class="v dim">3%</div>
-            </div>
-            <div class="row">
-              <div class="k">Moonset</div>
-              <div class="v dim">7:25 PM</div>
-            </div>
-            <div class="row">
-              <div class="k">Next Full Moon</div>
-              <div class="v dim">13 days</div>
-            </div>
+            <div class="row"><div class="k">Illumination</div><div class="v dim">3%</div></div>
+            <div class="row"><div class="k">Moonset</div><div class="v dim">7:25 PM</div></div>
+            <div class="row"><div class="k">Next Full Moon</div><div class="v dim">13 days</div></div>
           </div>
 
           <div class="moon-ball" aria-hidden="true"></div>
         </div>
       </article>
-    </aside>
-  </section>
+    </section>
 
-  <footer class="photo-credit">
-    Body background image overlay photo by
+    <footer class="photo-credit">
+      Body background overlay photo by
       <a href="https://unsplash.com/@riccardomion" target="_blank" rel="noopener">@RiccardoMion</a>
-    on
-    <a href="https://unsplash.com/photos/blue-and-orange-sky-DD8zES9GF_Y" target="_blank" rel="noopener">Unsplash</a>
-  </footer>
+      on
+      <a href="https://unsplash.com/photos/blue-and-orange-sky-DD8zES9GF_Y" target="_blank" rel="noopener">Unsplash</a>
+    </footer>
+  </div>
 </main>
 
 </body>
