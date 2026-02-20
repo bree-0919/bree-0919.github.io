@@ -1,3 +1,5 @@
+/* ===== CSS ===== */
+
 /* ========= HARD RESET ========= */
 *,
 *::before,
@@ -74,14 +76,12 @@ body{
   height: 100svh;
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 24px; /* 👈 more space between header and grid */
+  gap: 24px; /* more space between header and grid */
 }
 
 /* ========= HEADER ========= */
 .main-header{
   text-align: center;
-
- /* position: sticky; */
   top: 0;
   z-index: 5;
 
@@ -92,6 +92,22 @@ body{
   backdrop-filter: none;
 }
 
+/* (Optional) HOME pill styling if you want it visible */
+.home-pill{
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.16);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.temp-row{ display: flex; justify-content: center; }
+
 .main-temp{
   font-size: 4.6rem;
   font-weight: 200;
@@ -99,6 +115,7 @@ body{
   margin: 6px 0;
   line-height: 1;
 }
+.unit{ font-size: .35em; opacity: .85; margin-left: 4px; vertical-align: super; }
 
 .condition{ margin: 0; opacity: .95; }
 
@@ -111,13 +128,13 @@ body{
   gap: 8px;
   flex-wrap: wrap;
 }
- .dot{ opacity: .85; }
+.dot{ opacity: .85; }
 
 /* ========= SCROLL AREA ========= */
 .app-scroll{
   overflow: auto;
   padding-bottom: 22px;
-  padding-top: 6px; /* 👈 tiny extra breathing room */
+  padding-top: 6px;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
@@ -169,7 +186,7 @@ body{
 Desktop layout goal:
 - Forecast on left
 - Wind + Humidity on right (top)
-- Air + Moon “wrap” underneath the forecast (span both columns)
+- Air + Moon under forecast (span both columns)
 */
 @media (min-width: 860px){
   .cluster{
@@ -338,7 +355,6 @@ Desktop layout goal:
 
   -webkit-mask: radial-gradient(circle, transparent 58%, #000 60%);
           mask: radial-gradient(circle, transparent 58%, #000 60%);
-
   opacity: .65;
 }
 
@@ -498,13 +514,11 @@ Desktop layout goal:
   align-self: center;
   position: relative;
 
-  /* layered shading + subtle “surface” texture */
   background:
     radial-gradient(circle at 28% 22%, rgba(255,255,255,0.20), transparent 55%),
     radial-gradient(circle at 68% 72%, rgba(255,255,255,0.10), transparent 58%),
     radial-gradient(circle at 38% 58%, rgba(0,0,0,0.18), rgba(0,0,0,0.52) 68%),
 
-    /* micro texture */
     repeating-radial-gradient(circle at 40% 45%,
       rgba(255,255,255,0.035) 0 1px,
       rgba(0,0,0,0.04) 1px 2px
@@ -519,7 +533,6 @@ Desktop layout goal:
     0 10px 26px rgba(0,0,0,0.20);
 }
 
-/* crater layer */
 .moon-ball::before{
   content: "";
   position: absolute;
@@ -535,7 +548,6 @@ Desktop layout goal:
   filter: blur(0.2px);
 }
 
-/* soft highlight glaze */
 .moon-ball::after{
   content: "";
   position: absolute;
@@ -550,7 +562,6 @@ Desktop layout goal:
 .photo-credit{
   margin-top: 18px;
   padding-top: 10px;
-
   font-size: .72rem;
   opacity: .75;
   text-align: left;
@@ -568,6 +579,29 @@ Desktop layout goal:
     0 0 12px rgba(180,150,255,0.6);
 }
 
+/* ✅ FIXED: single landscape media query (no nesting) */
 @media (max-height: 500px) and (orientation: landscape) {
-  /* adjustments for short landscape screens */
+  /* shrink header only */
+  .weather-app { gap: 12px; padding-top: 10px; }
+
+  .main-header { padding: 6px 8px 6px; }
+  .main-header h1 { margin: 6px 0 2px; font-size: clamp(1.1rem, 3.6vw, 1.6rem); }
+  .main-temp { margin: 2px 0; font-size: clamp(2.2rem, 6.5vw, 3.1rem); }
+  .subline { margin-top: 4px; font-size: 0.82rem; gap: 6px; }
+  .condition{ font-size: 0.95rem; }
+
+  /* prevent the scroll area from getting clipped */
+  .app-scroll { min-height: 0; padding-top: 4px; padding-bottom: 12px; }
+
+  .home-pill{ transform: scale(0.92); }
+
+  .tile{ padding: 12px; }
+  .tile--mini{ min-height: 160px; }
+
+  /* OPTIONAL: shorten the visuals a bit */
+  .compass-face,
+  .moon-ball{
+    width: 96px;
+    height: 96px;
+  }
 }
