@@ -1,9 +1,9 @@
-/* ===== CSS ===== */
+/* CSS (replace everything in your CSS panel) */
 
 /* ========= HARD RESET ========= */
 *,
 *::before,
-*::after{ box-sizing: border-box; }
+*::after { box-sizing: border-box; }
 
 html, body{
   margin: 0;
@@ -62,51 +62,45 @@ body{
   50%{ opacity:1; }
 }
 
-/* ========= APP SHELL (Header + Scroll Area) ========= */
+/* ========= APP SHELL ========= */
 .weather-app{
   width: min(1180px, 100%);
   margin-inline: auto;
 
   padding-inline: clamp(16px, 4vw, 48px);
-
-  /* more sky shown above the grid */
   padding-top: clamp(18px, 3.2vh, 30px);
   padding-bottom: 14px;
 
   height: 100svh;
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 24px; /* more space between header and grid */
+  gap: 24px;
 }
 
 /* ========= HEADER ========= */
 .main-header{
   text-align: center;
-  top: 0;
-  z-index: 5;
-
   padding: 12px 10px 10px;
-
   background: transparent;
   border: none;
-  backdrop-filter: none;
 }
 
-/* (Optional) HOME pill styling if you want it visible */
 .home-pill{
   display: inline-block;
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.16);
-  font-size: .72rem;
+  font-size: .75rem;
   letter-spacing: .18em;
-  font-weight: 800;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(10px);
 }
 
-.temp-row{ display: flex; justify-content: center; }
+.main-header h1{
+  margin: 10px 0 0;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 800;
+}
 
 .main-temp{
   font-size: 4.6rem;
@@ -115,7 +109,6 @@ body{
   margin: 6px 0;
   line-height: 1;
 }
-.unit{ font-size: .35em; opacity: .85; margin-left: 4px; vertical-align: super; }
 
 .condition{ margin: 0; opacity: .95; }
 
@@ -130,9 +123,11 @@ body{
 }
 .dot{ opacity: .85; }
 
-/* ========= SCROLL AREA ========= */
+/* ========= SCROLL AREA (vertical only) ========= */
 .app-scroll{
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden; /* no side scroll */
+  min-height: 0;      /* lets the grid row actually shrink */
   padding-bottom: 22px;
   padding-top: 6px;
   overscroll-behavior: contain;
@@ -159,7 +154,7 @@ body{
   padding: 16px;
   position: relative;
   overflow: hidden;
-  min-width: 0;
+  min-width: 0; /* prevents grid overflow */
 }
 
 .tile-title{
@@ -175,22 +170,36 @@ body{
   display: grid;
   gap: 16px;
   min-width: 0;
+  overflow-x: hidden; /* extra safety */
 }
 
-/* Mobile: stack */
+/* Default mobile: stack */
 @media (max-width: 859px){
   .cluster{ grid-template-columns: 1fr; }
 }
 
-/*
-Desktop layout goal:
-- Forecast on left
-- Wind + Humidity on right (top)
-- Air + Moon under forecast (span both columns)
-*/
+/* Desktop */
 @media (min-width: 860px){
   .cluster{
     grid-template-columns: minmax(540px, 1fr) minmax(320px, 420px);
+    grid-template-areas:
+      "forecast righttop"
+      "forecast righttop"
+      "air      air"
+      "moon     moon";
+    align-items: start;
+  }
+
+  .tile--forecast{ grid-area: forecast; }
+  .mini-top{ grid-area: righttop; }
+  .tile--air{ grid-area: air; }
+  .tile--moon{ grid-area: moon; }
+}
+
+/* Mobile landscape: use the same 2-col wrap layout */
+@media (max-height: 500px) and (orientation: landscape) and (min-width: 720px){
+  .cluster{
+    grid-template-columns: minmax(380px, 1fr) minmax(260px, 340px);
     grid-template-areas:
       "forecast righttop"
       "forecast righttop"
@@ -225,7 +234,7 @@ Desktop layout goal:
 
 .forecast-row{
   display: grid;
-  grid-template-columns: .9fr 1.1fr 1fr 1fr;
+  grid-template-columns: minmax(72px,.9fr) minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);
   gap: 10px;
   align-items: center;
 
@@ -238,8 +247,9 @@ Desktop layout goal:
 }
 
 .forecast-row .day{ font-weight: 700; }
+.forecast-row .cond{ min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .forecast-row .range,
-.forecast-row .wind{ text-align: right; }
+.forecast-row .wind{ text-align: right; white-space: nowrap; }
 
 @media (max-width: 620px){
   .forecast-row{
@@ -249,6 +259,7 @@ Desktop layout goal:
   }
   .forecast-row .range,
   .forecast-row .wind{ text-align: left; }
+  .forecast-row .cond{ white-space: normal; }
 }
 
 /* ========= MINI TILE HEADER ========= */
@@ -355,6 +366,7 @@ Desktop layout goal:
 
   -webkit-mask: radial-gradient(circle, transparent 58%, #000 60%);
           mask: radial-gradient(circle, transparent 58%, #000 60%);
+
   opacity: .65;
 }
 
@@ -488,7 +500,7 @@ Desktop layout goal:
     0 0 0 6px rgba(0,0,0,0.18);
 }
 
-/* ========= MOON TILE (TEXTURED “APPLE-ISH”) ========= */
+/* ========= MOON TILE ========= */
 .tile--moon{ min-height: 210px; }
 
 .moon-grid{
@@ -518,12 +530,10 @@ Desktop layout goal:
     radial-gradient(circle at 28% 22%, rgba(255,255,255,0.20), transparent 55%),
     radial-gradient(circle at 68% 72%, rgba(255,255,255,0.10), transparent 58%),
     radial-gradient(circle at 38% 58%, rgba(0,0,0,0.18), rgba(0,0,0,0.52) 68%),
-
     repeating-radial-gradient(circle at 40% 45%,
       rgba(255,255,255,0.035) 0 1px,
       rgba(0,0,0,0.04) 1px 2px
     ),
-
     rgba(255,255,255,0.06);
 
   border: 1px solid rgba(255,255,255,0.16);
@@ -579,26 +589,19 @@ Desktop layout goal:
     0 0 12px rgba(180,150,255,0.6);
 }
 
-/* ✅ FIXED: single landscape media query (no nesting) */
+/* ========= SHORT LANDSCAPE: shrink header, keep vertical scroll ========= */
 @media (max-height: 500px) and (orientation: landscape) {
-  /* shrink header only */
-  .weather-app { gap: 12px; padding-top: 10px; }
+  .weather-app{ gap: 12px; padding-top: 10px; }
 
-  .main-header { padding: 6px 8px 6px; }
-  .main-header h1 { margin: 6px 0 2px; font-size: clamp(1.1rem, 3.6vw, 1.6rem); }
-  .main-temp { margin: 2px 0; font-size: clamp(2.2rem, 6.5vw, 3.1rem); }
-  .subline { margin-top: 4px; font-size: 0.82rem; gap: 6px; }
-  .condition{ font-size: 0.95rem; }
-
-  /* prevent the scroll area from getting clipped */
-  .app-scroll { min-height: 0; padding-top: 4px; padding-bottom: 12px; }
-
-  .home-pill{ transform: scale(0.92); }
+  .main-header{ padding: 6px 8px; }
+  .main-header h1{ margin: 6px 0 2px; font-size: clamp(1.1rem, 3.6vw, 1.6rem); }
+  .main-temp{ margin: 2px 0; font-size: clamp(2.2rem, 6.5vw, 3.1rem); }
+  .subline{ margin-top: 4px; font-size: .82rem; gap: 6px; }
+  .condition{ font-size: .95rem; }
 
   .tile{ padding: 12px; }
   .tile--mini{ min-height: 160px; }
 
-  /* OPTIONAL: shorten the visuals a bit */
   .compass-face,
   .moon-ball{
     width: 96px;
