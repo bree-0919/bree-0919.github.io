@@ -1,26 +1,25 @@
-/* Apply consistent box model across all elements */
+/* ==============================
+   BOX STYLES
+============================== */
 * {
   box-sizing: border-box;
 }
 
-/* Center entire game on screen with gradient background */
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-attachment: fixed;
-
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-
-  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
-
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: Arial, sans-serif;
   color: white;
 }
 
+/* ==============================
+   TITLE
+============================== */
 /* Main title styling */
 .game-title {
   margin: 0 0 20px;
@@ -36,135 +35,104 @@ body {
   text-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
 }
 
-/* Shared styling for game status text */
+/* ==============================
+   TURN + STATUS TEXT
+============================== */
 #turnDisplay,
 #status {
   margin: 6px 0;
-  min-height: 1.5em; /* prevents layout shift */
+  font-weight: bold;
+  letter-spacing: 1px;
   text-align: center;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-
-  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
-/* Default turn display */
-#turnDisplay {
-  color: #f4f0ff;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
-}
-
-/* Player-specific turn colors */
-#turnDisplay.player-x {
+/* Player colors */
+.player-x {
   color: #8cffc1;
-  text-shadow: 0 0 12px rgba(140, 255, 193, 0.95),
-    0 0 24px rgba(120, 255, 210, 0.45);
+  text-shadow: 0 0 10px rgba(140, 255, 193, 0.7);
 }
 
-#turnDisplay.player-o {
+.player-o {
   color: #c77dff;
-  text-shadow: 0 0 12px rgba(199, 125, 255, 0.95),
-    0 0 24px rgba(140, 80, 255, 0.45);
+  text-shadow: 0 0 10px rgba(199, 125, 255, 0.6);
 }
 
-/* Default status (neutral messages like draw) */
-#status {
-  color: #f4f0ff;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-}
-
-/* Winner highlight styles */
-#status.winner-x {
+/* Winner text */
+.winner-x {
   color: #8cffc1;
-  text-shadow: 0 0 14px rgba(140, 255, 193, 0.9),
-    0 0 28px rgba(120, 255, 210, 0.4);
 }
 
-#status.winner-o {
+.winner-o {
   color: #c77dff;
-  text-shadow: 0 0 14px rgba(199, 125, 255, 0.9),
-    0 0 28px rgba(140, 80, 255, 0.4);
 }
 
-/* Game board layout using CSS Grid */
+/* ==============================
+   GAME BOARD
+============================== */
 #gameBoard {
   display: grid;
-  grid-template-columns: repeat(3, minmax(70px, 100px));
-  grid-template-rows: repeat(3, minmax(70px, 100px));
-  gap: 15px;
-  margin: 18px 0;
-  justify-content: center;
+  grid-template-columns: repeat(3, 90px);
+  grid-template-rows: repeat(3, 90px);
+  gap: 12px;
+  margin: 20px 0;
 }
 
-/* Individual game cells */
+/* ==============================
+   CELLS
+============================== */
 .cell {
-  width: 100px;
-  height: 100px;
-
+  width: 90px;
+  height: 90px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
 
-  font-size: 3rem;
-  cursor: pointer;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
 
-  /* Glassmorphism effect */
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-
-  aspect-ratio: 1 / 1;
-
-  transition: all 0.3s ease;
-
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15),
-    0 0 25px rgba(180, 150, 255, 0.25), inset 0 0 12px rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: 0.25s;
 }
 
-/* Hover effect for interactivity */
 .cell:hover {
   background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-5px);
-
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.3),
-    0 0 40px rgba(180, 150, 255, 0.4), inset 0 0 14px rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
 }
 
-/* X and O styling */
+/* ==============================
+   X + O STYLING
+============================== */
 .cell.x {
   color: #8cffc1;
+  text-shadow: 0 0 12px rgba(140, 255, 193, 0.8);
 }
 
 .cell.o {
   color: #c77dff;
+  text-shadow: 0 0 8px rgba(199, 125, 255, 0.6); /* toned down 👀 */
 }
 
-/* Disable interaction after click */
 .cell.disabled {
   cursor: default;
 }
 
-/* Restart button styling */
+/* ==============================
+   BUTTON
+============================== */
 #resetBtn {
   padding: 10px 20px;
-
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid white;
-  color: white;
-
   border-radius: 10px;
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
   cursor: pointer;
-
-  backdrop-filter: blur(5px);
-
   transition: 0.3s;
-  font-family: inherit;
-  font-size: 1rem;
 }
 
-/* Button hover effect */
 #resetBtn:hover {
   background: white;
   color: #764ba2;
