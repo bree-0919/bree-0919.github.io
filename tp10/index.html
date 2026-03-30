@@ -4,20 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TP10 Click-Tac-Toe</title>
+  <title>TP10 Tic-Tac-Toe</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+
   <h1 class="game-title">Tic-Tac-Toe</h1>
 
-  <!-- Shows whose turn it is during the game -->
+  <!-- Turn display -->
   <p id="turnDisplay">TURN: PLAYER X</p>
 
-  <!-- Shows winner or draw message -->
+  <!-- Game result -->
   <p id="status"></p>
 
-  <!-- Game board with 9 clickable spaces -->
+  <!-- Game board -->
   <div id="gameBoard">
     <div class="cell" data-index="0"></div>
     <div class="cell" data-index="1"></div>
@@ -30,7 +31,7 @@
     <div class="cell" data-index="8"></div>
   </div>
 
-  <!-- Resets the board and starts a new game -->
+  <!-- Reset button -->
   <button id="resetBtn">Restart Game</button>
 
   <script src="scripts.js"></script>
