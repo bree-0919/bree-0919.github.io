@@ -1,0 +1,237 @@
+/* Keep sizing predictable across all elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Main page layout and background */
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 28px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* Main title styling */
+.game-title {
+  margin: 0 0 14px;
+  font-size: clamp(3.2rem, 8vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+  background: linear-gradient(90deg, #ffffff, #dcd6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
+}
+
+/* Countdown message during preview */
+#countdown {
+  min-height: 28px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #fff7ff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+}
+
+/* Turn counter styling */
+#turnCount {
+  margin-bottom: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #ffffff;
+}
+
+#turnCount span {
+  font-weight: 700;
+}
+
+/* Win message styling */
+#winning {
+  min-height: 32px;
+  margin-bottom: 18px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+/* 4-column board layout */
+#gameBoard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  width: min(90vw, 600px);
+  margin: 0 auto;
+}
+
+/* Each card works like a 3D flip container */
+.card {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+/* Inner layer that rotates when the card flips */
+.cardContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease, opacity 0.4s ease;
+}
+
+/* JavaScript adds .clicked when a card flips */
+.card.clicked .cardContent {
+  transform: rotateY(180deg);
+}
+
+/* Shared face styles */
+.cardTop,
+.cardBottom {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+}
+
+/* Front of the card with brighter glow */
+.cardTop {
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 12px rgba(255, 255, 255, 0.25), 0 0 24px rgba(200, 180, 255, 0.15);
+  transition: all 0.25s ease;
+}
+
+/* Hover effect only for active cards */
+.card:not(.clicked):not(.matched):hover .cardTop {
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 18px rgba(255, 255, 255, 0.45), 0 0 36px rgba(200, 180, 255, 0.35);
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Back of the card with the image */
+.cardBottom {
+  transform: rotateY(180deg);
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* Matched cards can no longer be clicked */
+.card.matched {
+  pointer-events: none;
+}
+
+/* Matched cards stay visible in place, but dim slightly */
+.card.matched .cardContent {
+  transform: rotateY(180deg) scale(0.96);
+  filter: grayscale(0.15) brightness(0.72);
+}
+
+/* Add a checkmark overlay to matched cards */
+.card.matched .cardBottom::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(25, 18, 50, 0.34);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.9),
+    0 0 18px rgba(255, 255, 255, 0.55);
+  border-radius: 12px;
+}
+
+/* Image and glow for pair 1 */
+.pair1 .cardBottom {
+  background-image: url("https://images.unsplash.com/photo-1537210249814-b9a10a161ae4?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85");
+  box-shadow: 0 0 18px #ff00ff;
+}
+
+/* Image and glow for pair 2 */
+.pair2 .cardBottom {
+  background-image: url("https://images.unsplash.com/photo-1585074245704-62bd99f04219?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85");
+  box-shadow: 0 0 18px #00ffff;
+}
+
+/* Image and glow for pair 3 */
+.pair3 .cardBottom {
+  background-image: url("https://images.unsplash.com/photo-1673990959548-81f5947da8f0?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85");
+  box-shadow: 0 0 6px #d580ff, 0 0 14px #c05cff, 0 0 22px #a84cff;
+}
+
+/* Image and glow for pair 4 */
+.pair4 .cardBottom {
+  background-image: url("https://images.unsplash.com/photo-1508697014387-db70aad34f4d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85");
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9),
+    0 0 18px rgba(200, 230, 255, 0.8), 0 0 34px rgba(150, 200, 255, 0.6),
+    0 0 50px rgba(120, 180, 255, 0.5);
+}
+
+/* Image and glow for pair 5 */
+.pair5 .cardBottom {
+  background-image: url("https://images.unsplash.com/photo-1720711621736-3c3f4714b2f0?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85");
+  box-shadow: 0 0 18px #00ff00;
+}
+
+/* Image and glow for pair 6 */
+.pair6 .cardBottom {
+  background-image: url("https://images.unsplash.com/photo-1696351808576-e882b848b93e?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85");
+  box-shadow: 0 0 6px #f4ff9a, 0 0 14px #d4ff4d, 0 0 26px #b6ff00,
+    0 0 42px rgba(182, 255, 0, 0.6);
+}
+
+/* Image and glow for pair 7 */
+.pair7 .cardBottom {
+  background-image: url("https://images.unsplash.com/photo-1694440967479-4ee9d6d6b587?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODIwMjl8&ixlib=rb-4.1.0&q=85");
+  box-shadow: 0 0 8px rgba(255, 255, 220, 0.9),
+    0 0 18px rgba(255, 230, 180, 0.7), 0 0 34px rgba(255, 200, 120, 0.6),
+    0 0 50px rgba(255, 170, 80, 0.5);
+}
+
+/* Image and glow for pair 8 */
+.pair8 .cardBottom {
+  background-image: url("https://images.unsplash.com/photo-1696353342921-1c07791c05eb?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzE0ODQ2ODN8&ixlib=rb-4.1.0&q=85");
+  box-shadow: 0 0 6px #ffd27a, 0 0 14px #ffb347, 0 0 26px #ff8c00,
+    0 0 40px rgba(255, 140, 0, 0.6);
+}
+
+/* Small-screen adjustments */
+@media (max-width: 600px) {
+  #gameBoard {
+    gap: 12px;
+    width: min(94vw, 500px);
+  }
+
+  .game-title {
+    font-size: clamp(2.6rem, 10vw, 4rem);
+  }
+
+  #countdown,
+  #turnCount,
+  #winning {
+    font-size: 1rem;
+  }
+}
