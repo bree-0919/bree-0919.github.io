@@ -1,11 +1,11 @@
 // Wait until the page has loaded before starting the game
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   // Grab the main elements needed for gameplay
-  const gameBoard = document.querySelector("#gameBoard");
-  const cards = Array.from(document.querySelectorAll(".card"));
-  const turnOutput = document.querySelector("#turnCount span");
-  const winningOutput = document.querySelector("#winning");
-  const countdownOutput = document.querySelector("#countdown");
+  const gameBoard = document.querySelector('#gameBoard');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const turnOutput = document.querySelector('#turnCount span');
+  const winningOutput = document.querySelector('#winning');
+  const countdownOutput = document.querySelector('#countdown');
 
   // Track overall game state
   let turns = 0;
@@ -29,22 +29,22 @@ document.addEventListener("DOMContentLoaded", function () {
     // Put shuffled cards back into the board and reset classes
     shuffledCards.forEach(function (card) {
       gameBoard.appendChild(card);
-      card.classList.remove("matched");
-      card.classList.remove("clicked");
+      card.classList.remove('matched');
+      card.classList.remove('clicked');
     });
   }
 
   // Add a click listener to each card
   function addCardListeners() {
     cards.forEach(function (card) {
-      card.addEventListener("click", flipCard);
+      card.addEventListener('click', flipCard);
     });
   }
 
   // Show all cards briefly at the start for memorization
   function showPreviewAtStart() {
     cards.forEach(function (card) {
-      card.classList.add("clicked");
+      card.classList.add('clicked');
     });
 
     let secondsLeft = previewDelay / 1000;
@@ -57,23 +57,23 @@ document.addEventListener("DOMContentLoaded", function () {
       if (secondsLeft > 0) {
         countdownOutput.textContent = `Memorize the board... ${secondsLeft}`;
       } else {
-        countdownOutput.textContent = "Go!";
+        countdownOutput.textContent = 'Go!';
       }
     }, 1000);
 
     // After preview time, flip everything back down and unlock play
     setTimeout(function () {
       cards.forEach(function (card) {
-        card.classList.remove("clicked");
+        card.classList.remove('clicked');
       });
 
       clearInterval(countdownTimer);
-      countdownOutput.textContent = "Game started";
+      countdownOutput.textContent = 'Game started';
       boardLocked = false;
 
       // Clear the status message shortly after the game begins
       setTimeout(function () {
-        countdownOutput.textContent = "";
+        countdownOutput.textContent = '';
       }, 1200);
     }, previewDelay);
   }
@@ -86,22 +86,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Ignore cards that already matched
-    if (this.classList.contains("matched")) {
+    if (this.classList.contains('matched')) {
       return;
     }
 
     // Ignore cards that are already flipped
-    if (this.classList.contains("clicked")) {
+    if (this.classList.contains('clicked')) {
       return;
     }
 
     // Flip the selected card
-    this.classList.add("clicked");
+    this.classList.add('clicked');
 
     // Find all currently flipped cards that are not already matched
-    const clickedCards = document.querySelectorAll(
-      ".card.clicked:not(.matched)"
-    );
+    const clickedCards = document.querySelectorAll('.card.clicked:not(.matched)');
 
     // One turn happens after the second card is clicked
     if (clickedCards.length === 2) {
@@ -120,8 +118,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // If the pair class matches, mark both cards as matched
     if (pairClass1 === pairClass2) {
       setTimeout(function () {
-        card1.classList.add("matched");
-        card2.classList.add("matched");
+        card1.classList.add('matched');
+        card2.classList.add('matched');
 
         clearClickedCards();
         boardLocked = false;
@@ -138,21 +136,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Remove the clicked class so cards flip back down
   function clearClickedCards() {
-    const clickedCards = document.querySelectorAll(
-      ".card.clicked:not(.matched)"
-    );
+    const clickedCards = document.querySelectorAll('.card.clicked:not(.matched)');
 
     clickedCards.forEach(function (card) {
-      card.classList.remove("clicked");
+      card.classList.remove('clicked');
     });
   }
 
   // Check if all cards are now matched
   function checkForWin() {
-    const matchedCards = document.querySelectorAll(".card.matched");
+    const matchedCards = document.querySelectorAll('.card.matched');
 
     if (matchedCards.length === cards.length) {
-      winningOutput.innerHTML = `✨ You win in ${turns} turns ✨`;
+      winningOutput.innerHTML = `✨  YOU WIN ✨`;
       boardLocked = true;
     }
   }
@@ -162,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const classList = Array.from(card.classList);
 
     return classList.find(function (className) {
-      return className.startsWith("pair");
+      return className.startsWith('pair');
     });
   }
 });
