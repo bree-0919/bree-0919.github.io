@@ -278,6 +278,8 @@ document.addEventListener("DOMContentLoaded", function () {
   locationForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
+    window.history.replaceState({}, "", window.location.pathname);
+
     const newLocation = locationBox.value.trim();
 
     if (newLocation === "") {
