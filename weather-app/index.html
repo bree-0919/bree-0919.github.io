@@ -7,125 +7,205 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://images.unsplash.com/photo-1526723840248-0ad14803008d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzEyNDQ5MDJ8&ixlib=rb-4.1.0&q=85" rel="stylesheet">
 </head>
-<body><!-- ===== CLEANED CODE ===== -->
-<div class="sky-background" aria-hidden="true">
-  <div class="moon" aria-hidden="true"></div>
+<body><div class="sky-background" aria-hidden="true">
+  <div class="moon"></div>
 
   <div class="star" style="top: 10%; left: 15%;"></div>
   <div class="star" style="top: 25%; left: 45%; animation-delay: 1s;"></div>
   <div class="star" style="top: 15%; left: 80%; animation-delay: 0.5s;"></div>
   <div class="star" style="top: 50%; left: 10%; animation-delay: 1.2s;"></div>
   <div class="star" style="top: 40%; left: 60%; animation-delay: 0.3s;"></div>
+  <div class="star" style="top: 65%; left: 75%; animation-delay: 0.8s;"></div>
 </div>
 
-<main class="weather-app" aria-label="Weather app layout">
+<div class="modal-cover" id="modalCover" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+    <button class="modal-close" id="closeModalBtn" aria-label="Close location form">×</button>
+    <h2 id="modalTitle">Choose a Location</h2>
+    <p class="modal-copy">
+      Enter a city, town, ZIP code, or other supported location.
+    </p>
+
+    <form id="locationForm" class="location-form">
+      <label for="locationBox" class="sr-only">Location</label>
+      <input type="text" id="locationBox" name="locationBox" placeholder="Ex: Seattle, 98660, Miami" autocomplete="off" required />
+      <button type="submit" class="submit-btn">Get Weather</button>
+    </form>
+  </div>
+</div>
+
+<main class="weather-app" aria-label="Weather app">
   <header class="main-header">
-    <div class="home-pill">HOME</div>
-    <h1>Vancouver, WA</h1>
+    <div class="header-top">
+      <div class="home-pill">LIVE WEATHER</div>
+
+      <button id="findLocationBtn" class="location-btn" type="button" aria-label="Open location form">
+        New Location
+      </button>
+    </div>
+
+    <h1 id="cityName">Loading...</h1>
 
     <div class="temp-row">
-      <div class="main-temp">37°<span class="unit">F</span></div>
+      <div class="main-temp">
+        <span id="currentTemp">--</span><span class="deg">°</span><span class="unit">F</span>
+      </div>
     </div>
 
     <p class="condition">
-      Cloudy <span class="icon" aria-hidden="true">☁️</span>
+      <span id="conditionText">Waiting for weather...</span>
+      <img id="currentConditionIcon" class="weather-icon current-weather-icon" src="" alt="" />
     </p>
 
     <div class="subline">
-      <span>Feels Like: 36°</span>
+      <span>Feels Like: <span id="feelsLikeTemp">--</span>°</span>
       <span class="dot">•</span>
-      <span>H: 41°</span>
+      <span>H: <span id="highTemp">--</span>°</span>
       <span class="dot">•</span>
-      <span>L: 35°</span>
+      <span>L: <span id="lowTemp">--</span>°</span>
     </div>
+
+    <p id="statusMessage" class="status-message" aria-live="polite"></p>
   </header>
 
-  <!-- Scrolls vertical only -->
   <div class="app-scroll" aria-label="Scrollable weather content">
     <section class="cluster" aria-label="Weather tiles">
-      <!-- LEFT: Forecast -->
       <article class="card tile tile--forecast" aria-label="7-day forecast">
         <h2 class="tile-title">7-Day Forecast</h2>
 
         <div class="forecast-list">
-          <div class="forecast-row">
-            <div class="day">Today</div>
-            <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
-            <div class="range">35°–42°</div>
-            <div class="wind">8 mph SW</div>
+          <div class="forecast-row future-day">
+            <div class="day" id="forecastDay0Name">Today</div>
+            <div class="cond">
+              <img id="forecastDay0Icon" class="weather-icon forecast-icon" src="" alt="" />
+              <span id="forecastDay0Condition">--</span>
+            </div>
+            <div class="range">
+              <span id="forecastDay0Low">--</span>°–<span id="forecastDay0High">--</span>°
+            </div>
+            <div class="wind">
+              <span id="forecastDay0Wind">--</span> mph
+            </div>
           </div>
 
-          <div class="forecast-row">
-            <div class="day">Thu</div>
-            <div class="cond"><span aria-hidden="true">❄️</span> Snow</div>
-            <div class="range">33°–44°</div>
-            <div class="wind">6 mph W</div>
+          <div class="forecast-row future-day">
+            <div class="day" id="forecastDay1Name">--</div>
+            <div class="cond">
+              <img id="forecastDay1Icon" class="weather-icon forecast-icon" src="" alt="" />
+              <span id="forecastDay1Condition">--</span>
+            </div>
+            <div class="range">
+              <span id="forecastDay1Low">--</span>°–<span id="forecastDay1High">--</span>°
+            </div>
+            <div class="wind">
+              <span id="forecastDay1Wind">--</span> mph
+            </div>
           </div>
 
-          <div class="forecast-row">
-            <div class="day">Fri</div>
-            <div class="cond"><span aria-hidden="true">☁️</span> Clouds</div>
-            <div class="range">32°–44°</div>
-            <div class="wind">10 mph SE</div>
+          <div class="forecast-row future-day">
+            <div class="day" id="forecastDay2Name">--</div>
+            <div class="cond">
+              <img id="forecastDay2Icon" class="weather-icon forecast-icon" src="" alt="" />
+              <span id="forecastDay2Condition">--</span>
+            </div>
+            <div class="range">
+              <span id="forecastDay2Low">--</span>°–<span id="forecastDay2High">--</span>°
+            </div>
+            <div class="wind">
+              <span id="forecastDay2Wind">--</span> mph
+            </div>
           </div>
 
-          <div class="forecast-row">
-            <div class="day">Sat</div>
-            <div class="cond"><span aria-hidden="true">☁️</span> Clouds</div>
-            <div class="range">38°–49°</div>
-            <div class="wind">7 mph S</div>
+          <div class="forecast-row future-day">
+            <div class="day" id="forecastDay3Name">--</div>
+            <div class="cond">
+              <img id="forecastDay3Icon" class="weather-icon forecast-icon" src="" alt="" />
+              <span id="forecastDay3Condition">--</span>
+            </div>
+            <div class="range">
+              <span id="forecastDay3Low">--</span>°–<span id="forecastDay3High">--</span>°
+            </div>
+            <div class="wind">
+              <span id="forecastDay3Wind">--</span> mph
+            </div>
           </div>
 
-          <div class="forecast-row">
-            <div class="day">Sun</div>
-            <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
-            <div class="range">45°–52°</div>
-            <div class="wind">9 mph SW</div>
+          <div class="forecast-row future-day">
+            <div class="day" id="forecastDay4Name">--</div>
+            <div class="cond">
+              <img id="forecastDay4Icon" class="weather-icon forecast-icon" src="" alt="" />
+              <span id="forecastDay4Condition">--</span>
+            </div>
+            <div class="range">
+              <span id="forecastDay4Low">--</span>°–<span id="forecastDay4High">--</span>°
+            </div>
+            <div class="wind">
+              <span id="forecastDay4Wind">--</span> mph
+            </div>
           </div>
 
-          <div class="forecast-row">
-            <div class="day">Mon</div>
-            <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
-            <div class="range">44°–51°</div>
-            <div class="wind">10 mph W</div>
+          <div class="forecast-row future-day">
+            <div class="day" id="forecastDay5Name">--</div>
+            <div class="cond">
+              <img id="forecastDay5Icon" class="weather-icon forecast-icon" src="" alt="" />
+              <span id="forecastDay5Condition">--</span>
+            </div>
+            <div class="range">
+              <span id="forecastDay5Low">--</span>°–<span id="forecastDay5High">--</span>°
+            </div>
+            <div class="wind">
+              <span id="forecastDay5Wind">--</span> mph
+            </div>
           </div>
 
-          <div class="forecast-row">
-            <div class="day">Tue</div>
-            <div class="cond"><span aria-hidden="true">🌧️</span> Rain</div>
-            <div class="range">42°–49°</div>
-            <div class="wind">8 mph NW</div>
+          <div class="forecast-row future-day">
+            <div class="day" id="forecastDay6Name">--</div>
+            <div class="cond">
+              <img id="forecastDay6Icon" class="weather-icon forecast-icon" src="" alt="" />
+              <span id="forecastDay6Condition">--</span>
+            </div>
+            <div class="range">
+              <span id="forecastDay6Low">--</span>°–<span id="forecastDay6High">--</span>°
+            </div>
+            <div class="wind">
+              <span id="forecastDay6Wind">--</span> mph
+            </div>
           </div>
         </div>
       </article>
 
-      <!-- RIGHT TOP -->
       <aside class="mini-top" aria-label="Top right tiles">
-        <!-- WIND -->
         <article class="card tile tile--mini tile--wind" aria-label="Wind details">
           <div class="tile-head">
             <div class="tile-label">
               <span class="mini-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M3 8h10.5c2.2 0 3.5-1.1 3.5-2.6C17 3.5 15.6 2 13.6 2c-1.6 0-2.8.9-3.2 2.2"
-                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                  <path d="M3 12h14.5c2.3 0 3.5 1.2 3.5 2.8 0 1.9-1.6 3.2-3.6 3.2-1.7 0-2.9-.9-3.3-2.2"
-                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M3 8h10.5c2.2 0 3.5-1.1 3.5-2.6C17 3.5 15.6 2 13.6 2c-1.6 0-2.8.9-3.2 2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M3 12h14.5c2.3 0 3.5 1.2 3.5 2.8 0 1.9-1.6 3.2-3.6 3.2-1.7 0-2.9-.9-3.3-2.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
                 </svg>
               </span>
               <span class="mini-title">WIND</span>
             </div>
-            <div class="mini-dim">7 mph</div>
+            <div class="mini-dim"><span id="windTop">--</span> mph</div>
           </div>
 
           <div class="wind-grid">
             <div class="wind-lines">
-              <div class="row"><div class="k">Wind</div><div class="v dim">7 mph</div></div>
-              <div class="row"><div class="k">Gusts</div><div class="v dim">16 mph</div></div>
-              <div class="row"><div class="k">Direction</div><div class="v dim">197° SSW</div></div>
+              <div class="row">
+                <div class="k">Wind</div>
+                <div class="v dim"><span id="windSpeed">--</span> mph</div>
+              </div>
+              <div class="row">
+                <div class="k">Gusts</div>
+                <div class="v dim"><span id="windGust">--</span> mph</div>
+              </div>
+              <div class="row">
+                <div class="k">Direction</div>
+                <div class="v dim"><span id="windDirection">--</span></div>
+              </div>
             </div>
 
-            <div class="compass" aria-hidden="true" style="--from:197deg;">
+            <div class="compass" aria-hidden="true">
               <div class="compass-face">
                 <div class="tick-ring"></div>
 
@@ -136,13 +216,13 @@
                   <span class="w">W</span>
                 </div>
 
-                <div class="needle">
+                <div class="needle" id="compassNeedle">
                   <div class="needle-head"></div>
                   <div class="needle-tail"></div>
                 </div>
 
                 <div class="compass-readout">
-                  <div class="num">7</div>
+                  <div class="num" id="compassWindValue">--</div>
                   <div class="u">mph</div>
                 </div>
               </div>
@@ -150,38 +230,39 @@
           </div>
         </article>
 
-        <!-- HUMIDITY -->
         <article class="card tile tile--mini tile--humidity" aria-label="Humidity details">
           <div class="tile-head">
             <div class="tile-label">
               <span class="mini-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2s6 6.6 6 11.4A6 6 0 1 1 6 13.4C6 8.6 12 2 12 2Z"
-                        stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <path d="M12 2s6 6.6 6 11.4A6 6 0 1 1 6 13.4C6 8.6 12 2 12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
                 </svg>
               </span>
               <span class="mini-title">HUMIDITY</span>
             </div>
           </div>
 
-          <div class="big-metric">80<span class="pct">%</span></div>
-          <p class="mini-note">The dew point is <strong>35°</strong> right now.</p>
+          <div class="big-metric">
+            <span id="humidityValue">--</span><span class="pct">%</span>
+          </div>
+          <p class="mini-note">
+            The dew point is <strong><span id="dewPointValue">--</span>°</strong> right now.
+          </p>
         </article>
       </aside>
 
-      <!-- AIR QUALITY -->
       <article class="card tile tile--mini tile--air" aria-label="Air quality details">
         <div class="tile-head">
           <div class="tile-label">
             <span class="mini-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
-                <circle cx="6" cy="8" r="1.2" fill="currentColor"/>
-                <circle cx="10" cy="6" r="1.2" fill="currentColor"/>
-                <circle cx="14" cy="8" r="1.2" fill="currentColor"/>
-                <circle cx="18" cy="6" r="1.2" fill="currentColor"/>
-                <circle cx="8" cy="12" r="1.2" fill="currentColor"/>
-                <circle cx="12" cy="14" r="1.2" fill="currentColor"/>
-                <circle cx="16" cy="12" r="1.2" fill="currentColor"/>
+                <circle cx="6" cy="8" r="1.2" fill="currentColor" />
+                <circle cx="10" cy="6" r="1.2" fill="currentColor" />
+                <circle cx="14" cy="8" r="1.2" fill="currentColor" />
+                <circle cx="18" cy="6" r="1.2" fill="currentColor" />
+                <circle cx="8" cy="12" r="1.2" fill="currentColor" />
+                <circle cx="12" cy="14" r="1.2" fill="currentColor" />
+                <circle cx="16" cy="12" r="1.2" fill="currentColor" />
               </svg>
             </span>
             <span class="mini-title">AIR QUALITY</span>
@@ -189,39 +270,47 @@
         </div>
 
         <div class="aq-top">
-          <div class="aq-num">30</div>
-          <div class="aq-word">Good</div>
+          <div class="aq-num" id="airQualityNumber">--</div>
+          <div class="aq-word" id="airQualityWord">Unavailable</div>
         </div>
 
-        <div class="aq-bar" aria-hidden="true" style="--pos: 12%; --aq: #1ee37a;">
+        <div class="aq-bar" id="aqBar" aria-hidden="true">
           <div class="aq-track"></div>
-          <div class="aq-marker"></div>
+          <div class="aq-marker" id="aqMarker"></div>
         </div>
 
         <p class="mini-note">
-          Air quality index is <strong>30</strong>, similar to yesterday at about this time.
+          Air quality reading:
+          <strong id="airQualitySummary">Waiting for data...</strong>
         </p>
       </article>
 
-      <!-- MOON -->
       <article class="card tile tile--mini tile--moon" aria-label="Moon details">
         <div class="tile-head">
           <div class="tile-label">
             <span class="mini-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
-                <path d="M21 14.5A8.5 8.5 0 0 1 10 3.1 7 7 0 1 0 21 14.5Z"
-                      stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M21 14.5A8.5 8.5 0 0 1 10 3.1 7 7 0 1 0 21 14.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
               </svg>
             </span>
-            <span class="mini-title">WAXING CRESCENT</span>
+            <span class="mini-title" id="moonPhaseTitle">MOON PHASE</span>
           </div>
         </div>
 
         <div class="moon-grid">
           <div class="moon-lines">
-            <div class="row"><div class="k">Illumination</div><div class="v dim">3%</div></div>
-            <div class="row"><div class="k">Moonset</div><div class="v dim">7:25 PM</div></div>
-            <div class="row"><div class="k">Next Full Moon</div><div class="v dim">13 days</div></div>
+            <div class="row">
+              <div class="k">Illumination</div>
+              <div class="v dim"><span id="moonIllumination">--</span>%</div>
+            </div>
+            <div class="row">
+              <div class="k">Moonrise</div>
+              <div class="v dim" id="moonriseTime">--</div>
+            </div>
+            <div class="row">
+              <div class="k">Moonset</div>
+              <div class="v dim" id="moonsetTime">--</div>
+            </div>
           </div>
 
           <div class="moon-ball" aria-hidden="true"></div>
