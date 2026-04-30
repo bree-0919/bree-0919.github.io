@@ -551,10 +551,17 @@ body {
 }
 
 .app-shell {
-  width: min(1180px, calc(100% - 160px)) !important;
-  height: auto !important;
-  min-height: auto !important;
-  margin: clamp(145px, 16vh, 220px) auto 110px !important;
+  width: min(1180px, calc(100% - 160px));
+  height: auto;
+
+  /* THIS is the magic */
+  margin: 0 auto;
+  position: relative;
+  top: 12vh; /* pushes whole UI down relative to screen height */
+
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
 }
 
 .sidebar,
