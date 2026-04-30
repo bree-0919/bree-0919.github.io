@@ -516,3 +516,11 @@ dialog::backdrop {
     min-height: 240px;
   }
 }
+/* 📱 MOBILE PORTRAIT SPACING FIX */
+@media (max-width: 600px) {
+
+  .app-shell {
+    margin-top: 18vh; /* push everything down */
+  }
+
+}
