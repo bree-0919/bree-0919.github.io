@@ -1,145 +1,587 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neurocloudy | Cosmic Conditions Interface</title>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
 
-  <link rel="stylesheet" href="styles.css" />
-  <script src="script.js" defer></script>
-</head>
+body {
+  font-family: "Nunito", system-ui, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+    radial-gradient(circle at 18% 18%, rgba(255, 220, 250, 0.52), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(190, 180, 255, 0.55), transparent 30%),
+    radial-gradient(circle at 56% 82%, rgba(255, 180, 225, 0.38), transparent 34%),
+    linear-gradient(145deg, #f9ddec 0%, #c8d6ff 34%, #7769ce 68%, #1a1438 100%);
+}
 
-<body>
-  <div class="cosmic-bg" aria-hidden="true">
-    <div class="moon"></div>
-    <div class="orb orb-pink"></div>
-    <div class="orb orb-blue"></div>
-    <div class="orb orb-purple"></div>
-    <div class="star star-a"></div>
-    <div class="star star-b"></div>
-    <div class="star star-c"></div>
-    <div class="star star-d"></div>
-    <div class="star star-e"></div>
-  </div>
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background-image: url("https://images.unsplash.com/photo-1526723840248-0ad14803008d?auto=format&fit=crop&w=1600&q=85");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
 
-  <main class="app-shell">
-    <aside class="sidebar">
-      <section class="brand">
-        <div class="brand-icon">☁️</div>
-        <div>
-          <h1>neurocloudy</h1>
-          <p>Cosmic Conditions</p>
-        </div>
-      </section>
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.04), rgba(24,16,68,.55)),
+    radial-gradient(circle at right top, rgba(255,240,255,.28), transparent 32%);
+  pointer-events: none;
+}
 
-      <nav class="side-nav">
-        <button class="active">⌂ Home Dashboard</button>
-        <button>☉ Planetary Alignments</button>
-        <button>☁ Atmosphere</button>
-        <button>☾ Moon Phases</button>
-        <button>≋ Earth Resonance</button>
-        <button>🛸 UAP / Flight Data</button>
-        <button>🗓 Timeline / Archive</button>
-      </nav>
+.cosmic-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
 
-      <button class="settings-btn">⚙ Settings / About</button>
-    </aside>
+.moon,
+.orb,
+.star {
+  position: absolute;
+  border-radius: 999px;
+}
 
-    <section class="dashboard">
-      <header class="topbar">
-        <button id="locationBtn" class="pill">📍 <span id="locationName">Seattle, WA</span></button>
+.moon {
+  top: 7%;
+  right: 6%;
+  width: 78px;
+  height: 78px;
+  background: radial-gradient(circle at 35% 28%, #fff, #eadfff 45%, #b9a3ff);
+  box-shadow: 0 0 34px rgba(255,255,255,.7), 0 0 82px rgba(210,185,255,.52);
+  opacity: .9;
+}
 
-        <div class="time-box">
-          <strong id="currentTime">--:--</strong>
-          <span id="currentDate">Loading date...</span>
-        </div>
+.orb-pink {
+  top: 25%;
+  right: 25%;
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle, #ffbdf3, #806cff 70%);
+  box-shadow: 0 0 30px rgba(255,190,242,.85);
+}
 
-        <input id="searchInput" class="search" placeholder="Search cosmic conditions..." />
-      </header>
+.orb-blue {
+  bottom: 18%;
+  left: 13%;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, #ccfff9, #8174ff 72%);
+  box-shadow: 0 0 26px rgba(200,255,249,.82);
+}
 
-      <section class="hero">
-        <p class="eyebrow">Observe • Understand • Connect</p>
-        <h2>Welcome back, Explorer.</h2>
-        <p>Here’s what’s happening in your sky, atmosphere, and beyond.</p>
-      </section>
+.orb-purple {
+  top: 58%;
+  left: 52%;
+  width: 11px;
+  height: 11px;
+  background: radial-gradient(circle, white, #a6d2ff, transparent 75%);
+  box-shadow: 0 0 22px rgba(200,230,255,.8);
+}
 
-      <div class="section-row">
-        <h3>Current Conditions Overview</h3>
-        <button id="refreshBtn" class="mini-btn">Refresh</button>
-      </div>
+.star {
+  width: 4px;
+  height: 4px;
+  background: white;
+  box-shadow: 0 0 12px white;
+  animation: twinkle 3.2s infinite ease-in-out;
+}
 
-      <section class="cards-grid">
-        <article class="data-card">
-          <span>Atmospheric Conditions</span>
-          <h4><span id="temp">--</span>°F</h4>
-          <p id="condition">Loading atmosphere...</p>
-          <small>Wind: <b id="wind">--</b> mph · Humidity: <b id="humidity">--</b>%</small>
-        </article>
+.star-a { top: 12%; left: 18%; }
+.star-b { top: 34%; left: 54%; animation-delay: .8s; }
+.star-c { top: 68%; left: 76%; animation-delay: 1.2s; }
+.star-d { top: 44%; left: 12%; animation-delay: .4s; }
+.star-e { top: 76%; left: 36%; animation-delay: .2s; }
 
-        <article class="data-card">
-          <span>Space Weather</span>
-          <h4>Kp <span id="kpIndex">3</span></h4>
-          <p>Quiet geomagnetic sample reading.</p>
-          <small>Solar wind: <b>392</b> km/s · Density: <b>2.1</b></small>
-        </article>
+@keyframes twinkle {
+  0%, 100% { opacity: .35; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.7); }
+}
 
-        <article class="data-card">
-          <span>Moon Phase</span>
-          <h4 id="moonPhase">Waxing</h4>
-          <p id="moonNote">Current lunar state estimate.</p>
-          <small>Illumination: <b id="moonIllumination">--</b>% · Cycle: <b id="moonAge">--</b> days</small>
-        </article>
+.app-shell {
+  width: min(1180px, calc(100% - 110px));
+  height: auto;
+  min-height: calc(100svh - 170px);
 
-        <article class="data-card">
-          <span>Earth Resonance</span>
-          <h4>7.83 Hz</h4>
-          <p>Schumann resonance baseline.</p>
-          <small>Status: <b>Calm</b> · Signal: <b>Stable</b></small>
-        </article>
-      </section>
+  /* 👇 THIS is the magic */
+  margin: clamp(80px, 10vh, 140px) auto clamp(60px, 8vh, 100px);
 
-      <section class="wide-grid">
-        <article class="data-card wide-card">
-          <div class="section-row inner-row">
-            <h3>Planetary Alignment Snapshot</h3>
-            <button class="mini-btn">View →</button>
-          </div>
-          <div class="planet-line">☉ ☿ ♀ ⊕ ♂ ♃ ♄</div>
-        </article>
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 28px;
+}
 
-        <article class="data-card wide-card">
-          <div class="section-row inner-row">
-            <h3>Recent Alerts & Events</h3>
-            <button class="mini-btn">View all →</button>
-          </div>
-          <ul class="alerts">
-            <li>⚠ Minor geomagnetic activity possible <span>2h ago</span></li>
-            <li>☉ Solar flare watch active <span>5h ago</span></li>
-            <li>🛸 Local skywatch observation window <span>Tonight</span></li>
-          </ul>
-        </article>
-      </section>
+/* layout containers are intentionally invisible */
+.sidebar,
+.dashboard {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
 
-      <section class="data-card observation-card">
-        <h3>Observation Log</h3>
-        <textarea id="observationInput" placeholder="What are you noticing right now?"></textarea>
-        <button id="saveObservation" class="mini-btn">Add Observation</button>
-        <p id="savedObservation"></p>
-      </section>
-    </section>
-  </main>
+.sidebar {
+  min-height: calc(100svh - 28px);
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+}
 
-  <dialog id="locationDialog">
-    <form method="dialog" class="dialog-box">
-      <h2>Choose Location</h2>
-      <input id="cityInput" placeholder="Try Seattle, Portland, Miami..." />
-      <button id="submitLocation" type="button">Update Conditions</button>
-      <button type="submit">Close</button>
-    </form>
-  </dialog>
-</body>
-</html>
+.dashboard {
+  min-height: calc(100svh - 28px);
+  overflow-y: auto;
+  padding: 16px 8px 28px;
+}
+
+.dashboard::-webkit-scrollbar {
+  width: 9px;
+}
+
+.dashboard::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.34);
+  border-radius: 999px;
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 0 4px;
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(20, 12, 58, 0.24);
+  border: 1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(14px);
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -.03em;
+  color: #fff;
+  text-shadow:
+    0 0 10px rgba(255,255,255,.38),
+    0 3px 18px rgba(18,8,50,.95);
+}
+
+.brand p {
+  margin: 3px 0 0;
+  font-size: .82rem;
+  color: rgba(255,255,255,.9);
+  text-shadow: 0 2px 12px rgba(18,8,50,.9);
+}
+
+.side-nav {
+  display: grid;
+  gap: 8px;
+}
+
+.side-nav button,
+.settings-btn,
+.pill,
+.search,
+.mini-btn,
+.dialog-box button {
+  border: 1px solid rgba(255,255,255,.24);
+  background: rgba(18, 10, 55, 0.24);
+  color: #fff;
+  border-radius: 13px;
+  font: inherit;
+  font-weight: 900;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-shadow: 0 2px 12px rgba(0,0,0,.72);
+  box-shadow:
+    0 8px 18px rgba(18,10,55,.14),
+    inset 0 0 18px rgba(255,255,255,.035);
+}
+
+.side-nav button,
+.settings-btn {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 11px;
+  text-align: left;
+  font-size: .85rem;
+  line-height: 1.12;
+  cursor: pointer;
+}
+
+.settings-btn {
+  margin-top: auto;
+  text-align: center;
+}
+
+.side-nav button:hover,
+.side-nav button.active,
+.settings-btn:hover,
+.mini-btn:hover,
+.pill:hover {
+  background: rgba(45, 28, 105, 0.34);
+  border-color: rgba(255,255,255,.34);
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: minmax(170px, 1fr) auto minmax(190px, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  background: transparent;
+}
+
+.pill,
+.search {
+  min-height: 38px;
+  padding: 9px 12px;
+  font-size: .88rem;
+}
+
+.search {
+  outline: none;
+}
+
+.search::placeholder,
+textarea::placeholder,
+.dialog-box input::placeholder {
+  color: rgba(255,255,255,.76);
+}
+
+.time-box {
+  text-align: center;
+  color: white;
+  text-shadow:
+    0 0 10px rgba(255,255,255,.25),
+    0 3px 18px rgba(18,8,50,.95);
+}
+
+.time-box strong {
+  display: block;
+  font-size: 1.15rem;
+}
+
+.time-box span {
+  font-size: .78rem;
+  opacity: .92;
+}
+
+.hero {
+  min-height: 210px;
+  border-radius: 24px;
+  padding: 34px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    linear-gradient(90deg, rgba(10, 7, 30, .62), rgba(62, 45, 130, .18)),
+    url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1600&q=85");
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255,255,255,.3);
+  box-shadow: 0 20px 60px rgba(20,12,58,.28);
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  font-size: .76rem;
+  font-weight: 900;
+  text-shadow: 0 2px 14px rgba(0,0,0,.85);
+}
+
+.hero h2 {
+  margin: 0 0 14px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1;
+  text-shadow:
+    0 0 16px rgba(255,255,255,.28),
+    0 4px 22px rgba(0,0,0,.82);
+}
+
+.hero p {
+  margin: 0;
+  max-width: 650px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-shadow: 0 3px 18px rgba(0,0,0,.8);
+}
+
+.section-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 14px;
+}
+
+.section-row h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  text-shadow:
+    0 0 10px rgba(255,255,255,.22),
+    0 3px 16px rgba(18,8,50,.95);
+}
+
+.mini-btn {
+  padding: 8px 12px;
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(165px, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.wide-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.data-card {
+  min-height: 170px;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(18, 10, 55, 0.16);
+  border: 1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 12px 32px rgba(20,12,58,.16),
+    inset 0 0 18px rgba(255,255,255,.03);
+  text-shadow: 0 2px 14px rgba(0,0,0,.68);
+}
+
+.data-card span:first-child,
+.data-card > span {
+  display: block;
+  margin-bottom: 12px;
+  font-size: .68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 900;
+  opacity: .92;
+}
+
+.data-card h4 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 3vw, 2.9rem);
+  line-height: 1;
+  text-shadow:
+    0 0 15px rgba(255,255,255,.2),
+    0 4px 22px rgba(0,0,0,.7);
+}
+
+.data-card p,
+.data-card small {
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.wide-card {
+  min-height: 160px;
+}
+
+.inner-row h3 {
+  font-size: .98rem;
+}
+
+.planet-line {
+  font-size: 2rem;
+  letter-spacing: .18em;
+  text-shadow:
+    0 0 18px rgba(255,255,255,.3),
+    0 3px 16px rgba(0,0,0,.7);
+}
+
+.alerts {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  list-style: none;
+}
+
+.alerts li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid rgba(255,255,255,.16);
+  font-weight: 800;
+}
+
+.alerts span {
+  opacity: .78;
+  white-space: nowrap;
+}
+
+textarea,
+.dialog-box input {
+  width: 100%;
+  min-height: 95px;
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(18,10,55,.20);
+  color: white;
+  font: inherit;
+  backdrop-filter: blur(12px);
+  resize: vertical;
+}
+
+#savedObservation {
+  font-weight: 900;
+}
+
+dialog {
+  border: 0;
+  padding: 0;
+  border-radius: 24px;
+  background: transparent;
+}
+
+dialog::backdrop {
+  background: rgba(20, 10, 60, .46);
+  backdrop-filter: blur(12px);
+}
+
+.dialog-box {
+  width: min(420px, 92vw);
+  display: grid;
+  gap: 12px;
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(18,10,55,.42);
+  border: 1px solid rgba(255,255,255,.25);
+  color: white;
+  backdrop-filter: blur(20px);
+}
+
+@media (max-width: 1100px) {
+  body {
+    overflow: auto;
+  }
+
+  .app-shell {
+    height: auto;
+    min-height: 100svh;
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar,
+  .dashboard {
+    min-height: auto;
+  }
+
+  .side-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wide-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .app-shell {
+    width: calc(100% - 42px);
+    margin: 70px auto 55px;
+  }
+
+  .topbar,
+  .side-nav,
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hero {
+    padding: 24px;
+    min-height: 240px;
+  }
+}
+
+/* FINAL LIVE-SITE SPACING OVERRIDE */
+
+html,
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app-shell {
+  width: min(1180px, calc(100% - 160px));
+  height: auto;
+
+  /* THIS is the magic */
+  margin: 0 auto;
+  position: relative;
+  top: 12vh; /* pushes whole UI down relative to screen height */
+
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+}
+
+.sidebar,
+.dashboard {
+  min-height: auto !important;
+}
+
+/* medium/tablet */
+@media (max-width: 1100px) {
+  .app-shell {
+    width: min(900px, calc(100% - 80px)) !important;
+    margin: clamp(100px, 12vh, 160px) auto 80px !important;
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* small/mobile */
+@media (max-width: 680px) {
+  .app-shell {
+    width: calc(100% - 36px) !important;
+    margin: 70px auto 55px !important;
+  }
+}
