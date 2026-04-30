@@ -116,12 +116,13 @@ body::after {
 }
 
 .app-shell {
-  width: min(1280px, calc(100% - 28px));
-  height: 100svh;
-  margin: 14px auto;
+  width: min(1180px, calc(100% - 110px));
+  height: auto;
+  min-height: calc(100svh - 170px);
+  margin: 95px auto 75px;
   display: grid;
   grid-template-columns: 230px 1fr;
-  gap: 18px;
+  gap: 28px;
 }
 
 /* layout containers are intentionally invisible */
@@ -516,8 +517,8 @@ dialog::backdrop {
 
 @media (max-width: 680px) {
   .app-shell {
-    width: calc(100% - 18px);
-    margin: 9px auto;
+    width: calc(100% - 42px);
+    margin: 70px auto 55px;
   }
 
   .topbar,
