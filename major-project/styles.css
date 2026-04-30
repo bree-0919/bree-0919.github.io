@@ -13,8 +13,8 @@ body {
 body {
   font-family: "Nunito", system-ui, sans-serif;
   color: #fff;
-  overflow: hidden;
-  background:
+  overflow-x: hidden;
+  overflow-y: auto;
     radial-gradient(circle at 18% 18%, rgba(255, 220, 250, 0.52), transparent 28%),
     radial-gradient(circle at 82% 12%, rgba(190, 180, 255, 0.55), transparent 30%),
     radial-gradient(circle at 56% 82%, rgba(255, 180, 225, 0.38), transparent 34%),
