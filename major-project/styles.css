@@ -540,3 +540,41 @@ dialog::backdrop {
     min-height: 240px;
   }
 }
+
+/* FINAL LIVE-SITE SPACING OVERRIDE */
+
+html,
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app-shell {
+  width: min(1180px, calc(100% - 160px)) !important;
+  height: auto !important;
+  min-height: auto !important;
+  margin: clamp(145px, 16vh, 220px) auto 110px !important;
+}
+
+.sidebar,
+.dashboard {
+  min-height: auto !important;
+}
+
+/* medium/tablet */
+@media (max-width: 1100px) {
+  .app-shell {
+    width: min(900px, calc(100% - 80px)) !important;
+    margin: clamp(100px, 12vh, 160px) auto 80px !important;
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* small/mobile */
+@media (max-width: 680px) {
+  .app-shell {
+    width: calc(100% - 36px) !important;
+    margin: 70px auto 55px !important;
+  }
+}
