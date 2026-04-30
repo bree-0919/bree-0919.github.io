@@ -15,6 +15,16 @@ body {
   color: #fff;
   overflow-x: hidden;
   overflow-y: auto;
+  background: #1a1438;
+}
+
+/* fixed dreamy background */
+.cosmic-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  overflow: hidden;
   background:
     radial-gradient(circle at 18% 18%, rgba(255, 220, 250, 0.52), transparent 28%),
     radial-gradient(circle at 82% 12%, rgba(190, 180, 255, 0.55), transparent 30%),
@@ -22,35 +32,24 @@ body {
     linear-gradient(145deg, #f9ddec 0%, #c8d6ff 34%, #7769ce 68%, #1a1438 100%);
 }
 
-body::before {
+.cosmic-bg::before {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: -3;
   background-image: url("https://images.unsplash.com/photo-1526723840248-0ad14803008d?auto=format&fit=crop&w=1600&q=85");
   background-size: cover;
   background-position: center;
   opacity: 0.5;
   mix-blend-mode: screen;
-  pointer-events: none;
 }
 
-body::after {
+.cosmic-bg::after {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: -2;
   background:
     linear-gradient(to bottom, rgba(255,255,255,.04), rgba(24,16,68,.55)),
     radial-gradient(circle at right top, rgba(255,240,255,.28), transparent 32%);
-  pointer-events: none;
-}
-
-.cosmic-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
 }
 
 .moon,
@@ -116,7 +115,7 @@ body::after {
   50% { opacity: 1; transform: scale(1.7); }
 }
 
-/* Main layout — this is what gives the big top breathing room */
+/* Desktop pushed down */
 .app-shell {
   width: min(1180px, calc(100% - 160px));
   margin: clamp(155px, 17vh, 260px) auto 110px;
@@ -125,7 +124,6 @@ body::after {
   gap: 40px;
 }
 
-/* containers stay invisible so the background shows */
 .sidebar,
 .dashboard {
   background: transparent;
@@ -476,7 +474,7 @@ dialog::backdrop {
 @media (max-width: 1100px) {
   .app-shell {
     width: min(900px, calc(100% - 80px));
-    margin: clamp(90px, 12vh, 150px) auto 80px;
+    margin: clamp(100px, 12vh, 160px) auto 80px;
     grid-template-columns: 1fr;
     gap: 28px;
   }
@@ -497,7 +495,7 @@ dialog::backdrop {
 @media (max-width: 680px) {
   .app-shell {
     width: calc(100% - 42px);
-    margin: 70px auto 55px;
+    margin: 18vh auto 55px;
   }
 
   .topbar,
@@ -514,36 +512,5 @@ dialog::backdrop {
   .hero {
     padding: 24px;
     min-height: 240px;
-  }
-}
-/* 📱 MOBILE PORTRAIT SPACING FIX */
-@media (max-width: 600px) {
-
-  .app-shell {
-    margin-top: 18vh; /* push everything down */
-  }
-
-}
-/* Keeps the dreamy overlay locked so raw image doesn't flash while scrolling */
-body {
-  background-attachment: scroll;
-}
-
-body::before,
-body::after,
-.cosmic-bg {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100dvh;
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-@supports (-webkit-touch-callout: none) {
-  body::before,
-  body::after,
-  .cosmic-bg {
-    height: 120dvh;
   }
 }
