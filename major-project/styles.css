@@ -119,7 +119,10 @@ body::after {
   width: min(1180px, calc(100% - 110px));
   height: auto;
   min-height: calc(100svh - 170px);
-  margin: 95px auto 75px;
+
+  /* 👇 THIS is the magic */
+  margin: clamp(80px, 10vh, 140px) auto clamp(60px, 8vh, 100px);
+
   display: grid;
   grid-template-columns: 230px 1fr;
   gap: 28px;
