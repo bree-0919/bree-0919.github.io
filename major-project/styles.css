@@ -524,3 +524,26 @@ dialog::backdrop {
   }
 
 }
+/* Keeps the dreamy overlay locked so raw image doesn't flash while scrolling */
+body {
+  background-attachment: scroll;
+}
+
+body::before,
+body::after,
+.cosmic-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@supports (-webkit-touch-callout: none) {
+  body::before,
+  body::after,
+  .cosmic-bg {
+    height: 120dvh;
+  }
+}
