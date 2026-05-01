@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neurocloudy | Cosmic Conditions Interface</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="cosmic-bg" aria-hidden="true">
+    <div class="moon"></div>
+    <div class="orb orb-pink"></div>
+    <div class="orb orb-blue"></div>
+    <div class="orb orb-purple"></div>
+    <div class="star star-a"></div>
+    <div class="star star-b"></div>
+    <div class="star star-c"></div>
+    <div class="star star-d"></div>
+    <div class="star star-e"></div>
+  </div>
+
+  <main class="app-shell">
+    <aside class="sidebar">
+      <section class="brand">
+        <div class="brand-icon">☁️</div>
+        <div>
+          <h1>neurocloudy</h1>
+          <p>Cosmic Conditions</p>
+        </div>
+      </section>
+
+      <nav class="side-nav">
+        <button class="active">⌂ Home Dashboard</button>
+        <button>☉ Planetary Alignments</button>
+        <button>☁ Atmosphere</button>
+        <button>☾ Moon Phases</button>
+        <button>≋ Earth Resonance</button>
+        <button>🛸 UAP / Flight Data</button>
+        <button>🗓 Timeline / Archive</button>
+      </nav>
+
+      <button class="settings-btn">⚙ Settings / About</button>
+    </aside>
+
+    <section class="dashboard">
+      <header class="topbar">
+        <button id="locationBtn" class="pill">📍 <span id="locationName">Seattle, WA</span></button>
+
+        <div class="time-box">
+          <strong id="currentTime">--:--</strong>
+          <span id="currentDate">Loading date...</span>
+        </div>
+
+        <input id="searchInput" class="search" placeholder="Search cosmic conditions..." />
+      </header>
+
+      <section class="hero">
+        <p class="eyebrow">Observe • Understand • Connect</p>
+        <h2>Welcome back, Explorer.</h2>
+        <p>Here’s what’s happening in your sky, atmosphere, and beyond.</p>
+      </section>
+
+      <div class="section-row">
+        <h3>Current Conditions Overview</h3>
+        <button id="refreshBtn" class="mini-btn">Refresh</button>
+      </div>
+
+      <section class="cards-grid">
+        <article class="data-card">
+          <span>Atmospheric Conditions</span>
+          <h4><span id="temp">--</span>°F</h4>
+          <p id="condition">Loading atmosphere...</p>
+          <small>Wind: <b id="wind">--</b> mph · Humidity: <b id="humidity">--</b>%</small>
+        </article>
+
+        <article class="data-card">
+          <span>Space Weather</span>
+          <h4>Kp <span id="kpIndex">3</span></h4>
+          <p>Quiet geomagnetic sample reading.</p>
+          <small>Solar wind: <b>392</b> km/s · Density: <b>2.1</b></small>
+        </article>
+
+        <article class="data-card">
+          <span>Moon Phase</span>
+          <h4 id="moonPhase">Waxing</h4>
+          <p id="moonNote">Current lunar state estimate.</p>
+          <small>Illumination: <b id="moonIllumination">--</b>% · Cycle: <b id="moonAge">--</b> days</small>
+        </article>
+
+        <article class="data-card">
+          <span>Earth Resonance</span>
+          <h4>7.83 Hz</h4>
+          <p>Schumann resonance baseline.</p>
+          <small>Status: <b>Calm</b> · Signal: <b>Stable</b></small>
+        </article>
+      </section>
+
+      <section class="wide-grid">
+        <article class="data-card wide-card">
+          <div class="section-row inner-row">
+            <h3>Planetary Alignment Snapshot</h3>
+            <button class="mini-btn">View →</button>
+          </div>
+          <div class="planet-line">☉ ☿ ♀ ⊕ ♂ ♃ ♄</div>
+        </article>
+
+        <article class="data-card wide-card">
+          <div class="section-row inner-row">
+            <h3>Recent Alerts & Events</h3>
+            <button class="mini-btn">View all →</button>
+          </div>
+          <ul class="alerts">
+            <li>⚠ Minor geomagnetic activity possible <span>2h ago</span></li>
+            <li>☉ Solar flare watch active <span>5h ago</span></li>
+            <li>🛸 Local skywatch observation window <span>Tonight</span></li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="data-card observation-card">
+        <h3>Observation Log</h3>
+        <textarea id="observationInput" placeholder="What are you noticing right now?"></textarea>
+        <button id="saveObservation" class="mini-btn">Add Observation</button>
+        <p id="savedObservation"></p>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="locationDialog">
+    <form method="dialog" class="dialog-box">
+      <h2>Choose Location</h2>
+      <input id="cityInput" placeholder="Try Seattle, Portland, Miami..." />
+      <button id="submitLocation" type="button">Update Conditions</button>
+      <button type="submit">Close</button>
+    </form>
+  </dialog>
+</body>
+</html>
