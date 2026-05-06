@@ -11,7 +11,7 @@ html, body {
   color: #F5F0FF;
   /* Use the project background image with a subtle dark overlay to keep text readable. */
   background:
-    linear-gradient(rgba(8,12,30,0.45), rgba(28,18,34,0.45)),
+   /* linear-gradient(rgba(8,12,30,0.45), rgba(28,18,34,0.45)), */
     url("https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzEyNjM1MTl8&ixlib=rb-4.1.0&q=85") center/cover no-repeat fixed;
   overflow-x: hidden;
   position: relative;
@@ -23,12 +23,12 @@ body::before {
   position: fixed;
   inset: 0; /* cover the viewport */
   pointer-events: none;
-  background-image:
+ /* background-image:
     radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.7) 50%, transparent 60%),
     radial-gradient(1.5px 1.5px at 30% 80%, rgba(255,255,255,0.5) 50%, transparent 60%),
     radial-gradient(2px 2px at 70% 50%, rgba(255,255,255,0.6) 50%, transparent 60%),
     radial-gradient(1px 1px at 90% 30%, rgba(255,255,255,0.4) 50%, transparent 60%),
-    radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.5) 50%, transparent 60%);
+    radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.5) 50%, transparent 60%); */
   background-size: 200px 200px;
   mix-blend-mode: screen;
   opacity: 0.9;
