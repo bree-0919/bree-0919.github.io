@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>neurocloudy.com | Cosmic Conditions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="layout">
+    <aside class="sidebar panel">
+      <div class="brand">
+        <div class="brand-icon">☁</div>
+        <div>
+          <h1>neurocloudy</h1>
+          <p>cosmic conditions</p>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <button class="active">⌂ Home Dashboard</button>
+        <button>☉ Planetary Alignments</button>
+        <button>☁ Atmosphere</button>
+        <button>☾ Moon Phases</button>
+        <button>≋ Earth Resonance</button>
+        <button>🛸 UAP / Flight Data</button>
+        <button>🗓 Timeline / Archive</button>
+      </nav>
+
+      <button class="settings">⚙ Settings / About</button>
+
+      <div class="location-card panel">
+        <h3 id="locationName">Seattle, WA</h3>
+        <p>United States</p>
+        <p id="currentDate">May 16, 2025</p>
+        <p id="currentTime">10:42 PM</p>
+      </div>
+    </aside>
+
+    <section class="content">
+      <header class="topbar">
+        <button id="locationBtn" class="pill">📍 Change location</button>
+        <input id="searchInput" class="search" placeholder="Search cosmic conditions..." />
+        <button id="refreshBtn" class="pill">⟳ Refresh All</button>
+      </header>
+
+      <section class="hero panel">
+        <p>OBSERVE • UNDERSTAND • CONNECT</p>
+        <h2>Welcome back, Explorer.</h2>
+        <h4>Here’s what’s happening in your sky, atmosphere, and beyond.</h4>
+      </section>
+
+      <section class="grid cards" id="conditionsGrid">
+        <article class="panel data-card" data-search="atmospheric atmosphere weather clouds humidity wind">
+          <h5>Atmospheric Conditions</h5>
+          <div class="metric"><span id="temp">--</span>°F</div>
+          <p id="condition">Loading weather...</p>
+          <small>Wind: <b id="wind">--</b> mph • Humidity: <b id="humidity">--</b>%</small>
+        </article>
+
+        <article class="panel data-card" data-search="space weather kp geomagnetic">
+          <h5>Space Weather</h5>
+          <div class="metric">Kp <span id="kpIndex">1.3</span></div>
+          <p id="spaceSummary">Geomagnetic field is calm.</p>
+          <small>Source: NOAA SWPC • <span class="live">Live</span></small>
+        </article>
+
+        <article class="panel data-card" data-search="moon phase illumination cycle lunar">
+          <h5>Moon Phase</h5>
+          <div class="metric" id="moonPhase">Waning Gibbous</div>
+          <p>Illumination: <span id="moonIllumination">--</span>%</p>
+          <small>Age: <b id="moonAge">--</b> days • <span class="live">Live</span></small>
+        </article>
+
+        <article class="panel data-card" data-search="earth resonance schumann hz">
+          <h5>Earth Resonance</h5>
+          <div class="metric" id="resonance">7.83 Hz</div>
+          <p>Schumann resonance baseline.</p>
+          <small>Status: <b id="resStatus">Calm</b> • Signal: <b id="resSignal">Stable</b></small>
+        </article>
+      </section>
+
+      <section class="grid two-col">
+        <article class="panel" data-search="planetary alignments planets">
+          <h4>Planetary Alignment Snapshot</h4>
+          <div id="planetRow" class="planet-row"></div>
+        </article>
+        <article class="panel" data-search="daily cosmic image nasa apod">
+          <h4>Daily Cosmic Image</h4>
+          <img id="apodImage" class="apod" alt="Daily cosmic" />
+          <h3 id="apodTitle"></h3>
+          <p id="apodDesc"></p>
+        </article>
+      </section>
+
+      <section class="grid two-col">
+        <article class="panel" data-search="alerts events geomagnetic moon solar">
+          <h4>Recent Alerts & Events</h4>
+          <ul id="alertsList" class="alerts"></ul>
+        </article>
+        <article class="panel" data-search="observation notes log">
+          <h4>Observation Log</h4>
+          <textarea id="observationInput" placeholder="What are you noticing right now?"></textarea>
+          <button id="saveObservation" class="pill">Add Observation</button>
+          <p id="savedObservation"></p>
+        </article>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,104 +1,169 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const mockData = {
-    planets: ['Sun','Mercury','Venus','Earth','Mars','Jupiter','Saturn','Uranus','Neptune'],
-    alerts: [
-      { text: 'Geomagnetic field is calm', time: 'Just now' },
-      { text: 'Waning gibbous moon visible', time: 'Just now' },
-      { text: 'No solar flares detected', time: '12m ago' }
-    ],
-    apod: {
-      title: 'Pillars of Creation',
-      description: 'A stellar nursery captured by the James Webb Space Telescope.',
-      image: 'https://images-assets.nasa.gov/image/PIA24566/PIA24566~orig.jpg'
-    }
+document.addEventListener("DOMContentLoaded", function () {
+  const locationName = document.querySelector("#locationName");
+  const locationBtn = document.querySelector("#locationBtn");
+  const refreshBtn = document.querySelector("#refreshBtn");
+  const currentTime = document.querySelector("#currentTime");
+  const currentDate = document.querySelector("#currentDate");
+
+  const temp = document.querySelector("#temp");
+  const condition = document.querySelector("#condition");
+  const wind = document.querySelector("#wind");
+  const humidity = document.querySelector("#humidity");
+
+  const moonPhase = document.querySelector("#moonPhase");
+  const moonNote = document.querySelector("#moonNote");
+  const moonIllumination = document.querySelector("#moonIllumination");
+  const moonAge = document.querySelector("#moonAge");
+
+  const locationDialog = document.querySelector("#locationDialog");
+  const cityInput = document.querySelector("#cityInput");
+  const submitLocation = document.querySelector("#submitLocation");
+
+  const observationInput = document.querySelector("#observationInput");
+  const saveObservation = document.querySelector("#saveObservation");
+  const savedObservation = document.querySelector("#savedObservation");
+
+  let currentCity = "Seattle";
+
+  const locations = {
+    seattle: { name: "Seattle, WA", latitude: 47.6062, longitude: -122.3321 },
+    portland: { name: "Portland, OR", latitude: 45.5152, longitude: -122.6784 },
+    vancouver: { name: "Vancouver, WA", latitude: 45.6387, longitude: -122.6615 },
+    miami: { name: "Miami, FL", latitude: 25.7617, longitude: -80.1918 },
+    "new york": { name: "New York, NY", latitude: 40.7128, longitude: -74.0060 },
+    "los angeles": { name: "Los Angeles, CA", latitude: 34.0522, longitude: -118.2437 }
   };
-
-  const ids = (id) => document.getElementById(id);
-  const locationName = ids('locationName');
-  const currentDate = ids('currentDate');
-  const currentTime = ids('currentTime');
-
-  const cityMap = {
-    seattle: { name: 'Seattle, WA', lat: 47.6062, lon: -122.3321 },
-    miami: { name: 'Miami, FL', lat: 25.7617, lon: -80.1918 },
-    austin: { name: 'Austin, TX', lat: 30.2672, lon: -97.7431 },
-    'new york': { name: 'New York, NY', lat: 40.7128, lon: -74.0060 }
-  };
-
-  let currentCity = 'seattle';
-
-  function renderMock() {
-    ids('planetRow').innerHTML = mockData.planets.map((p) => `<span class="planet">${p}</span>`).join('');
-    ids('alertsList').innerHTML = mockData.alerts.map((a) => `<li><span>${a.text}</span><span>${a.time}</span></li>`).join('');
-    ids('apodTitle').textContent = mockData.apod.title;
-    ids('apodDesc').textContent = mockData.apod.description;
-    ids('apodImage').src = mockData.apod.image;
-  }
 
   function updateClock() {
     const now = new Date();
-    currentDate.textContent = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    currentTime.textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit' });
+
+    currentTime.textContent = now.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit"
+    });
+
+    currentDate.textContent = now.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    });
   }
 
-  async function loadWeather(cityKey) {
-    const city = cityMap[cityKey] || cityMap.seattle;
-    currentCity = cityKey;
-    locationName.textContent = city.name;
-    try {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph`;
-      const response = await fetch(url);
-      const data = await response.json();
-      ids('temp').textContent = Math.round(data.current.temperature_2m);
-      ids('wind').textContent = Math.round(data.current.wind_speed_10m);
-      ids('humidity').textContent = Math.round(data.current.relative_humidity_2m);
-      ids('condition').textContent = ['Clear sky','Mainly clear','Partly cloudy','Overcast'][data.current.weather_code] || 'Live atmospheric data';
-    } catch {
-      ids('condition').textContent = 'Live weather unavailable right now.';
+  function getWeatherCodeText(code) {
+    const codes = {
+      0: "Clear sky",
+      1: "Mainly clear",
+      2: "Partly cloudy",
+      3: "Overcast",
+      45: "Fog",
+      61: "Slight rain",
+      63: "Moderate rain",
+      65: "Heavy rain",
+      80: "Rain showers",
+      95: "Thunderstorm"
+    };
+
+    return codes[code] || "Atmospheric data active";
+  }
+
+  function getPlace(city) {
+    const cleaned = city.toLowerCase().trim();
+    return locations[cleaned] || locations.seattle;
+  }
+
+  function loadWeather(city) {
+    const place = getPlace(city);
+    currentCity = city;
+    locationName.textContent = place.name;
+    condition.textContent = "Reading the atmosphere...";
+
+    const url =
+      `https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}` +
+      `&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code` +
+      `&temperature_unit=fahrenheit&wind_speed_unit=mph`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        temp.textContent = Math.round(data.current.temperature_2m);
+        wind.textContent = Math.round(data.current.wind_speed_10m);
+        humidity.textContent = Math.round(data.current.relative_humidity_2m);
+        condition.textContent = getWeatherCodeText(data.current.weather_code);
+      })
+      .catch(() => {
+        condition.textContent = "Weather data could not load.";
+      });
+  }
+
+  function getMoonData() {
+    const phases = [
+      "New Moon",
+      "Waxing Crescent",
+      "First Quarter",
+      "Waxing Gibbous",
+      "Full Moon",
+      "Waning Gibbous",
+      "Last Quarter",
+      "Waning Crescent"
+    ];
+
+    const now = new Date();
+    const knownNewMoon = new Date("2024-01-11T11:57:00");
+    const lunarCycle = 29.53058867;
+    const daysSince = (now - knownNewMoon) / (1000 * 60 * 60 * 24);
+    const phaseAge = ((daysSince % lunarCycle) + lunarCycle) % lunarCycle;
+    const phaseIndex = Math.floor((phaseAge / lunarCycle) * 8) % 8;
+    const illumination = Math.round((1 - Math.cos((2 * Math.PI * phaseAge) / lunarCycle)) * 50);
+
+    moonPhase.textContent = phases[phaseIndex];
+    moonAge.textContent = Math.round(phaseAge);
+    moonIllumination.textContent = illumination;
+    moonNote.textContent = `The moon is approximately ${Math.round(phaseAge)} days into its cycle.`;
+  }
+
+  function loadObservation() {
+    const saved = localStorage.getItem("neurocloudy_observation");
+
+    if (saved) {
+      observationInput.value = saved;
+      savedObservation.textContent = "Saved observation restored.";
     }
   }
 
-  function updateMoon() {
-    const lunarCycle = 29.53058867;
-    const phaseNames = ['New Moon','Waxing Crescent','First Quarter','Waxing Gibbous','Full Moon','Waning Gibbous','Last Quarter','Waning Crescent'];
-    const knownNew = new Date('2024-01-11T11:57:00Z');
-    const age = ((Date.now() - knownNew.getTime()) / 86400000) % lunarCycle;
-    const illum = Math.round((1 - Math.cos((2 * Math.PI * age) / lunarCycle)) * 50);
-    const phase = phaseNames[Math.floor((age / lunarCycle) * 8) % 8];
-    ids('moonAge').textContent = age.toFixed(1);
-    ids('moonIllumination').textContent = illum;
-    ids('moonPhase').textContent = phase;
-  }
-
-  document.getElementById('locationBtn').addEventListener('click', () => {
-    const next = prompt('Enter city: Seattle, Miami, Austin, New York');
-    if (next) loadWeather(next.toLowerCase().trim());
+  locationBtn.addEventListener("click", function () {
+    locationDialog.showModal();
   });
 
-  document.getElementById('refreshBtn').addEventListener('click', () => {
+  submitLocation.addEventListener("click", function () {
+    const nextCity = cityInput.value.trim();
+
+    if (nextCity) {
+      loadWeather(nextCity);
+      cityInput.value = "";
+      locationDialog.close();
+    }
+  });
+
+  refreshBtn.addEventListener("click", function () {
     loadWeather(currentCity);
-    updateMoon();
-    ids('kpIndex').textContent = (1 + Math.random() * 3).toFixed(1);
+    getMoonData();
   });
 
-  document.getElementById('searchInput').addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase().trim();
-    document.querySelectorAll('[data-search]').forEach((card) => {
-      card.style.display = !query || card.dataset.search.includes(query) ? '' : 'none';
-    });
+  saveObservation.addEventListener("click", function () {
+    const entry = observationInput.value.trim();
+
+    if (!entry) {
+      savedObservation.textContent = "Write an observation first.";
+      return;
+    }
+
+    localStorage.setItem("neurocloudy_observation", entry);
+    savedObservation.textContent = "Observation saved.";
   });
 
-  document.getElementById('saveObservation').addEventListener('click', () => {
-    const value = ids('observationInput').value.trim();
-    if (!value) return;
-    localStorage.setItem('neurocloudy_observation', value);
-    ids('savedObservation').textContent = 'Saved locally.';
-  });
-
-  ids('observationInput').value = localStorage.getItem('neurocloudy_observation') || '';
-  renderMock();
   updateClock();
-  updateMoon();
-  loadWeather(currentCity);
   setInterval(updateClock, 1000);
+  getMoonData();
+  loadObservation();
+  loadWeather(currentCity);
 });
