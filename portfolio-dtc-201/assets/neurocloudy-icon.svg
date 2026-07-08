@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" role="img" aria-labelledby="title desc">
+  <title id="title">neurocloudy icon</title>
+  <desc id="desc">A glowing cloud, crescent moon, and three connected creative nodes.</desc>
+  <defs>
+    <filter id="iconGlow" x="-35%" y="-45%" width="180%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0.82  0 1 0 0 0.64  0 0 1 0 1  0 0 0 .78 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <path fill="#ffd8fb" filter="url(#iconGlow)" d="M170 48c-27 16-36 51-18 78 14 22 42 32 66 24-19 18-49 24-76 12-36-17-50-59-32-94 12-24 35-35 60-20Z"/>
+  <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="9" filter="url(#iconGlow)" d="M83 153H55c-23 0-42-18-42-41 0-22 18-40 40-41 7-28 31-49 61-49 22 0 42 11 53 29 7-4 15-6 24-6 29 0 52 23 52 52 19 6 33 24 33 45 0 26-21 47-47 47h-61"/>
+  <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="7" filter="url(#iconGlow)" d="M87 154v34m40-34v48m40-48v34"/>
+  <circle cx="87" cy="190" r="10" fill="#8deaff" stroke="rgba(255,255,255,.92)" stroke-width="4" filter="url(#iconGlow)"/>
+  <circle cx="127" cy="204" r="10" fill="#ffb8f6" stroke="rgba(255,255,255,.92)" stroke-width="4" filter="url(#iconGlow)"/>
+  <circle cx="167" cy="190" r="10" fill="#a996ff" stroke="rgba(255,255,255,.92)" stroke-width="4" filter="url(#iconGlow)"/>
+</svg>
